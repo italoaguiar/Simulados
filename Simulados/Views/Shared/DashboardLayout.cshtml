@@ -1,79 +1,105 @@
-﻿<!DOCTYPE html>
-<html lang="en">
+﻿@using Microsoft.AspNet.Identity
+@using Simulados.Models
+@using Microsoft.AspNet.Identity.EntityFramework
 
+@{ 
+    var manager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
+    var currentUser = manager.FindById(User.Identity.GetUserId());
+    ViewBag.UserName = currentUser.Name;
+}
+<!DOCTYPE html>
+<html>
 <head>
-
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="description" content="">
     <meta name="author" content="">
 
     <title>@ViewBag.Title</title>
 
     @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
+    
 
 </head>
+<body class="bg-steel">
+    <div class="app-bar fixed-top" data-role="appbar">
+        <a class="app-bar-element branding">Simulados.com</a>
+        <span class="app-bar-divider"></span>
+        <ul class="app-bar-menu">
+            <li><a href="">Início</a></li>
+            <li>
+                <a href="" class="dropdown-toggle">Simulados</a>
+                <ul class="d-menu" data-role="dropdown">
+                    <li><a href="">Enem</a></li>
+                    <li class="divider"></li>
+                    <li><a href="">Detran</a></li>
+                    <li class="divider"></li>
+                    <li><a href="">Cesgranrio</a></li>
+                    <li class="divider"></li>
+                </ul>
+            </li>
+            <li><a href="">Ajuda</a></li>
+        </ul>
 
-<body class="userdashboard">
-
-    <div id="wrapper" >
-
-        <!-- Sidebar -->
-        <div id="sidebar-wrapper">
-            <ul class="sidebar-nav">
-                <li class="sidebar-brand">
-                    <a href="#">
-                        Start Bootstrap
-                    </a>
-                </li>
-                <li>
-                    <a href="#">Início</a>
-                </li>
-                <li>
-                    <a href="#">Meus Simulados</a>
-                </li>
-                <li>
-                    <a href="#">Minhas Estatísticas</a>
-                </li>
-                <li>
-                    <a href="#">Configurações</a>
-                </li>
-            </ul>
-        </div>
-        <!-- /#sidebar-wrapper -->
-        <!-- Page Content -->
-        
-        <div id="page-content-wrapper">
-            <div class="top-bar">
-                <h1>@ViewBag.Title</h1>
-
-                <div class="breadcrumb">
-
-                </div>
-            </div> 
-            <div id="page-content">                
-                @RenderBody()
+        <div class="app-bar-element place-right">
+            <span class="dropdown-toggle"><span class="mif-cog"></span> Olá @ViewBag.UserName</span>
+            <div class="app-bar-drop-container padding10 place-right no-margin-top block-shadow fg-dark" data-role="dropdown" data-no-close="true" style="width: 220px">
+                <h2 class="text-light">Quick settings</h2>
+                <ul class="unstyled-list fg-dark">
+                    <li><a href="" class="fg-white1 fg-hover-yellow">Profile</a></li>
+                    <li><a href="" class="fg-white2 fg-hover-yellow">Security</a></li>
+                    <li><a href="" class="fg-white3 fg-hover-yellow">Exit</a></li>
+                </ul>
             </div>
         </div>
-        <!-- /#page-content-wrapper -->
-
     </div>
-    <!-- /#wrapper -->
-    <!-- jQuery -->
+
+    <div class="page-content">
+        <div class="flex-grid no-responsive-future" style="height: 100%;">
+            <div class="row" style="height: 100%">
+                <div class="cell size-x200" id="cell-sidebar" style="background-color: #71b1d1; height: 100%">
+                    <ul class="sidebar">
+                        <li>
+                            <a href="#">
+                                <span class="mif-home icon"></span>
+                                <span class="title">Início</span>
+                                <span class="counter">0</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <span class="mif-list2 icon"></span>
+                                <span class="title">Meus Simulados</span>
+                                <span class="counter">0</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <span class="mif-chart-dots icon"></span>
+                                <span class="title">Minhas Estatísticas</span>
+                                <span class="counter">2</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <span class="mif-cog icon"></span>
+                                <span class="title">Configurações</span>
+                                <span class="counter">0</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="cell auto-size padding20 bg-white" id="cell-content">
+                    @RenderBody()
+                </div>
+            </div>
+        </div>
+    </div>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+
+
     @RenderSection("scripts", required: false)
-
-    <!-- Menu Toggle Script -->
-    <script>
-    $("#menu-toggle").click(function(e) {
-        e.preventDefault();
-        $("#wrapper").toggleClass("toggled");
-    });
-    </script>
-
 </body>
-
 </html>

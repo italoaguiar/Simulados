@@ -17,12 +17,19 @@ namespace Simulados
                         "~/Scripts/modernizr-*"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                      "~/Scripts/bootstrap.js",
+                      "~/Scripts/metro.min.js",
                       "~/Scripts/respond.js"));
 
+
+
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
+                "~/Content/metro.css",
+                "~/Content/metro-icons.min.css",
+                "~/Content/metro-colors.min.css",
+                "~/Content/metro-responsive.min.css",
+                "~/Content/metro-rtl.min.css",
+                "~/Content/metro-schemes.min.css",
+                "~/Content/site.css"));
         }
     }
 }

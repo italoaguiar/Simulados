@@ -1,0 +1,52 @@
+﻿@model IEnumerable<Admin.EF.Questoes>
+
+@{
+    ViewBag.Title = "Questões";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section menus{ 
+    <li class="active">@Html.ActionLink("Início", "Index", "Home")</li>
+    <li>@Html.ActionLink("Questões", "About", "Home")</li>
+    <li>@Html.ActionLink("Categorias", "Contact", "Home")</li>
+    <li>@Html.ActionLink("Subcategorias", "Contact", "Home")</li>
+}
+
+<h2>@ViewBag.Title</h2>
+
+<p>
+    @Html.ActionLink("Adicionar uma questão", "Novo")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Enunciado)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Subcategorias.Categorias.Nome)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Subcategorias.Nome)
+        </th>
+        <th>Opções</th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Enunciado)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Subcategorias.Categorias.Nome)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Subcategorias.Nome)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>

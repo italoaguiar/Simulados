@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace Simulados.Controllers
 {
+    [Authorize]
     public class UsuarioController : Controller
     {
         // GET: Usuario

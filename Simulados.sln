@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Simulados", "Simulados\Simulados.csproj", "{1BE52963-CEDE-443B-AFAC-B28F92B2619D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Simulado Remote Administration", "Simulado Remote Administration\Simulado Remote Administration.csproj", "{DE6D2D1D-8E41-4142-A06F-8A401F5BFAE4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Admin", "Admin\Admin.csproj", "{135A1A03-562C-4077-877E-D2502D4FFACB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{1BE52963-CEDE-443B-AFAC-B28F92B2619D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1BE52963-CEDE-443B-AFAC-B28F92B2619D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1BE52963-CEDE-443B-AFAC-B28F92B2619D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DE6D2D1D-8E41-4142-A06F-8A401F5BFAE4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DE6D2D1D-8E41-4142-A06F-8A401F5BFAE4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DE6D2D1D-8E41-4142-A06F-8A401F5BFAE4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DE6D2D1D-8E41-4142-A06F-8A401F5BFAE4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{135A1A03-562C-4077-877E-D2502D4FFACB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{135A1A03-562C-4077-877E-D2502D4FFACB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{135A1A03-562C-4077-877E-D2502D4FFACB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{135A1A03-562C-4077-877E-D2502D4FFACB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

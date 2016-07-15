@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="6b8802cda15e4c67bad2d538e281bd7a" Name="Diagram1">
+        <EntityTypeShape EntityType="LocalDBModel.Alternativas" Width="1.5" PointX="3" PointY="10" IsExpanded="true" />
+        <EntityTypeShape EntityType="LocalDBModel.Categorias" Width="1.5" PointX="0.75" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="LocalDBModel.Questoes" Width="1.5" PointX="5.25" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="LocalDBModel.Simulados" Width="1.5" PointX="3" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LocalDBModel.Simulados_Questoes" Width="1.5" PointX="7.5" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="LocalDBModel.Subcategorias" Width="1.5" PointX="3" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="LocalDBModel.Users" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="LocalDBModel.FK__Questoes__Corret__1BFD2C07" ManuallyRouted="false" />
+        <AssociationConnector Association="LocalDBModel.FK__Simulados__Cat__2A4B4B5E" ManuallyRouted="false" />
+        <AssociationConnector Association="LocalDBModel.FK__Subcategori__Pai__20C1E124" ManuallyRouted="false" />
+        <AssociationConnector Association="LocalDBModel.FK__Questoes__Cat__24927208" ManuallyRouted="false" />
+        <AssociationConnector Association="LocalDBModel.FK__Simulados__Marca__33D4B598" ManuallyRouted="false" />
+        <AssociationConnector Association="LocalDBModel.FK__Simulados__Quest__300424B4" ManuallyRouted="false" />
+        <AssociationConnector Association="LocalDBModel.FK__Simulados__Simul__2F10007B" ManuallyRouted="false" />
+        <AssociationConnector Association="LocalDBModel.FK__Simulados__Usuar__29572725" ManuallyRouted="false" />
+        <AssociationConnector Association="LocalDBModel.Questoes_Alternativas" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
