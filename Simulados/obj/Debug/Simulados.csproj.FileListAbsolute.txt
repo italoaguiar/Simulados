@@ -120,10 +120,10 @@ C:\Users\italo\Source\Repos\Simulados\Simulados\bin\System.Web.WebPages.xml
 C:\Users\italo\Source\Repos\Simulados\Simulados\bin\System.Web.WebPages.Deployment.xml
 C:\Users\italo\Source\Repos\Simulados\Simulados\bin\System.Web.WebPages.Razor.xml
 C:\Users\italo\Source\Repos\Simulados\Simulados\bin\Antlr3.Runtime.pdb
+C:\Users\italo\Source\Repos\Simulados\Simulados\obj\Debug\Simulados.Migrations.Name.resources
+C:\Users\italo\Source\Repos\Simulados\Simulados\obj\Debug\Simulados.Migrations.Picture.resources
+C:\Users\italo\Source\Repos\Simulados\Simulados\obj\Debug\Simulados.Migrations.Locale.resources
+C:\Users\italo\Source\Repos\Simulados\Simulados\obj\Debug\Simulados.csproj.GenerateResource.Cache
 C:\Users\italo\Source\Repos\Simulados\Simulados\obj\Debug\Simulados.dll
 C:\Users\italo\Source\Repos\Simulados\Simulados\obj\Debug\Simulados.pdb
 C:\Users\italo\Source\Repos\Simulados\Simulados\obj\Debug\Simulados.csprojResolveAssemblyReference.cache
-C:\Users\italo\Source\Repos\Simulados\Simulados\obj\Debug\Simulados.Migrations.Name.resources
-C:\Users\italo\Source\Repos\Simulados\Simulados\obj\Debug\Simulados.csproj.GenerateResource.Cache
-C:\Users\italo\Source\Repos\Simulados\Simulados\obj\Debug\Simulados.Migrations.Picture.resources
-C:\Users\italo\Source\Repos\Simulados\Simulados\obj\Debug\Simulados.Migrations.Locale.resources

@@ -5,7 +5,10 @@
 @{
     var manager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
     var currentUser = manager.FindById(User.Identity.GetUserId());
-    ViewBag.UserName = currentUser.Name;
+    if (currentUser != null)
+    {
+        ViewBag.UserName = currentUser.Name;
+    }
 }
 <!DOCTYPE html>
 <html>
@@ -23,42 +26,46 @@
 
 </head>
 <body class="bg-steel">
-    <div class="app-bar fixed-top" data-role="appbar">
-        <a class="app-bar-element branding">Simulados.com</a>
-        <span class="app-bar-divider"></span>
-        <ul class="app-bar-menu">
-            <li><a href="">Início</a></li>
-            <li>
-                <a href="" class="dropdown-toggle">Simulados</a>
-                <ul class="d-menu" data-role="dropdown">
-                    <li><a href="">Enem</a></li>
-                    <li class="divider"></li>
-                    <li><a href="">Detran</a></li>
-                    <li class="divider"></li>
-                    <li><a href="">Cesgranrio</a></li>
-                    <li class="divider"></li>
-                </ul>
-            </li>
-            <li><a href="">Ajuda</a></li>
-        </ul>
+    <header class="app-bar fixed-top" data-role="appbar">
+        <div class="container">
+            <a class="app-bar-element branding">Simulados.com</a>
+            <span class="app-bar-divider"></span>
+            <ul class="app-bar-menu">
+                <li><a href="">Início</a></li>
+                <li>
+                    <a href="" class="dropdown-toggle">Simulados</a>
+                    <ul class="d-menu" data-role="dropdown">
+                        <li><a href="">Enem</a></li>
+                        <li class="divider"></li>
+                        <li><a href="">Detran</a></li>
+                        <li class="divider"></li>
+                        <li><a href="">Cesgranrio</a></li>
+                        <li class="divider"></li>
+                    </ul>
+                </li>
+                <li><a href="">Ajuda</a></li>
+            </ul>
 
-        <div class="app-bar-element place-right">
-            <span class="dropdown-toggle"><span class="mif-cog"></span> Olá @ViewBag.UserName</span>
-            <div class="app-bar-drop-container padding10 place-right no-margin-top block-shadow fg-dark" data-role="dropdown" data-no-close="true" style="width: 220px">
-                <h2 class="text-light">Quick settings</h2>
-                <ul class="unstyled-list fg-dark">
-                    <li><a href="" class="fg-white1 fg-hover-yellow">Profile</a></li>
-                    <li><a href="" class="fg-white2 fg-hover-yellow" >Security</a></li>
-                    <li>@using (Html.BeginForm("LogOff", "Conta", FormMethod.Post))
-                    { 
-                        @Html.AntiForgeryToken()
-                        <input type="submit" value="Sair" class="link fg-white3 fg-hover-yellow"/>
-                    }
-                    </li>
-                </ul>
+            <div class="app-bar-element place-right">
+                <span class="dropdown-toggle"><span class="mif-cog"></span> Olá @ViewBag.UserName</span>
+                <div class="app-bar-drop-container padding10 place-right no-margin-top block-shadow fg-dark" data-role="dropdown" data-no-close="true" style="width: 220px">
+                    <h2 class="text-light">Quick settings</h2>
+                    <ul class="unstyled-list fg-dark">
+                        <li><a href="" class="fg-white1 fg-hover-yellow">Profile</a></li>
+                        <li><a href="" class="fg-white2 fg-hover-yellow">Security</a></li>
+                        <li>
+                            @using (Html.BeginForm("LogOff", "Conta", FormMethod.Post))
+                            {
+                                @Html.AntiForgeryToken()
+                                <input type="submit" value="Sair" class="link fg-white3 fg-hover-yellow" />
+                            }
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
-    </div>
+    </header>
+    
 
     <div class="page-content">
         <div class="flex-grid no-responsive-future" style="height: 100%;">

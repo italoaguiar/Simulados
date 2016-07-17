@@ -20,12 +20,24 @@ namespace Admin.Controllers
             EF.Categorias cat = new EF.Categorias();
             return View(cat);
         }
-        public ActionResult Editar()
+        public ActionResult Editar(int id)
         {
             return View();
         }
         public ActionResult Excluir()
         {
+            return View();
+        }
+        public ActionResult Salvar()
+        {
+            EF.DBConnection db = new EF.DBConnection();//gerenciador do BD
+
+            EF.Categorias c = new EF.Categorias();//Tabela do BD
+            c.Nome = "Enem";
+
+            db.Categorias.Add(c);
+            db.SaveChanges();
+
             return View();
         }
     }
