@@ -12,22 +12,19 @@ namespace Simulados.EF
     using System;
     using System.Collections.Generic;
     
-    public partial class Users
+    public partial class Alternativa
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Users()
+        public Alternativa()
         {
-            this.Simulados = new HashSet<Simulados>();
+            this.Questoes = new HashSet<Questao>();
         }
     
         public int Id { get; set; }
-        public string Nome { get; set; }
-        public string Email { get; set; }
-        public string Snh { get; set; }
-        public byte Ativo { get; set; }
-        public byte Admin { get; set; }
+        public string Valor { get; set; }
+        public string Imagem { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Simulados> Simulados { get; set; }
+        public virtual ICollection<Questao> Questoes { get; set; }
     }
 }

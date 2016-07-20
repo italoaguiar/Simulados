@@ -13,21 +13,10 @@ namespace Simulados.Controllers
     {
         public ActionResult Index()
         {
-            ViewBag.Title = "Home Page";
-
-            EF.LocalDBEntities e = new EF.LocalDBEntities();
-
-            var k = e.Questoes.ToArray();
-            ViewBag.Questoes = k;
-            ViewBag.Style = "border: 1px dotted";          
+            ViewBag.Title = "Home Page";       
             
                         
             return View();
-        }
-
-        public ContentResult Json()
-        {
-            return Content(""); 
         }
     }
 }

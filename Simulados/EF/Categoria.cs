@@ -12,29 +12,22 @@ namespace Simulados.EF
     using System;
     using System.Collections.Generic;
     
-    public partial class Questoes
+    public partial class Categoria
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Questoes()
+        public Categoria()
         {
-            this.Simulados_Questoes = new HashSet<Simulados_Questoes>();
-            this.Simulados_Questoes1 = new HashSet<Simulados_Questoes>();
-            this.Alternativa_Correta = new HashSet<Alternativas>();
+            this.Subcategorias = new HashSet<Subcategoria>();
+            this.Simulados = new HashSet<Simulado>();
         }
     
         public int Id { get; set; }
-        public string Enunciado { get; set; }
+        public string Nome { get; set; }
         public string Imagem { get; set; }
-        public int Correta { get; set; }
-        public int Cat { get; set; }
     
-        public virtual Alternativas Alternativas { get; set; }
-        public virtual Subcategorias Subcategorias { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Simulados_Questoes> Simulados_Questoes { get; set; }
+        public virtual ICollection<Subcategoria> Subcategorias { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Simulados_Questoes> Simulados_Questoes1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Alternativas> Alternativa_Correta { get; set; }
+        public virtual ICollection<Simulado> Simulados { get; set; }
     }
 }

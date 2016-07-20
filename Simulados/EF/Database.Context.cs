@@ -27,43 +27,25 @@ namespace Simulados.EF
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Alternativas> Alternativas { get; set; }
-        public virtual DbSet<Categorias> Categorias { get; set; }
-        public virtual DbSet<Questoes> Questoes { get; set; }
-        public virtual DbSet<Simulados> Simulados { get; set; }
+        public virtual DbSet<Categoria> Categorias { get; set; }
         public virtual DbSet<Simulados_Questoes> Simulados_Questoes { get; set; }
-        public virtual DbSet<Subcategorias> Subcategorias { get; set; }
-        public virtual DbSet<Users> Users { get; set; }
+        public virtual DbSet<Subcategoria> Subcategorias { get; set; }
+        public virtual DbSet<Simulado> Simulados { get; set; }
+        public virtual DbSet<Usuario> AspNetUsers { get; set; }
+        public virtual DbSet<Alternativa> Alternativas { get; set; }
+        public virtual DbSet<Questao> Questoes { get; set; }
     
-        public virtual int GeraSimulado(Nullable<int> usuario, Nullable<int> categoria)
+        public virtual int GeraSimulado(string usuario, Nullable<int> categoria, ObjectParameter idSimulado)
         {
-            var usuarioParameter = usuario.HasValue ?
+            var usuarioParameter = usuario != null ?
                 new ObjectParameter("usuario", usuario) :
-                new ObjectParameter("usuario", typeof(int));
+                new ObjectParameter("usuario", typeof(string));
     
             var categoriaParameter = categoria.HasValue ?
                 new ObjectParameter("categoria", categoria) :
                 new ObjectParameter("categoria", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("GeraSimulado", usuarioParameter, categoriaParameter);
-        }
-    
-        public virtual int GetAlternativasSimulado(Nullable<int> id)
-        {
-            var idParameter = id.HasValue ?
-                new ObjectParameter("id", id) :
-                new ObjectParameter("id", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("GetAlternativasSimulado", idParameter);
-        }
-    
-        public virtual int GetSimulado(Nullable<int> id)
-        {
-            var idParameter = id.HasValue ?
-                new ObjectParameter("id", id) :
-                new ObjectParameter("id", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("GetSimulado", idParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("GeraSimulado", usuarioParameter, categoriaParameter, idSimulado);
         }
     }
 }

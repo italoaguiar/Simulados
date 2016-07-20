@@ -12,22 +12,21 @@ namespace Simulados.EF
     using System;
     using System.Collections.Generic;
     
-    public partial class Simulados
+    public partial class Subcategoria
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Simulados()
+        public Subcategoria()
         {
-            this.Simulados_Questoes = new HashSet<Simulados_Questoes>();
+            this.Questoes = new HashSet<Questao>();
         }
     
         public int Id { get; set; }
-        public int Usuario { get; set; }
-        public System.DateTime Data { get; set; }
-        public int Cat { get; set; }
+        public string Nome { get; set; }
+        public int Pai { get; set; }
+        public int Qtd { get; set; }
     
-        public virtual Categorias Categorias { get; set; }
+        public virtual Categoria Categorias { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Simulados_Questoes> Simulados_Questoes { get; set; }
-        public virtual Users Users { get; set; }
+        public virtual ICollection<Questao> Questoes { get; set; }
     }
 }

@@ -24,6 +24,9 @@ body {
         flex-basis: calc(100% - 52px);
     }
 }
+.flex{
+    width: 52px;
+}
 
 .login-form 
 {
@@ -71,4 +74,13 @@ body {
     background-color: rgba(0,0,0, 0.4);
     width: 100%;
     height: 100%;
+}
+.distak-text{
+    font-weight:400;    
+}
+
+.vertical-center {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
 }

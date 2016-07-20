@@ -1,0 +1,89 @@
+﻿@model IEnumerable<Simulados.EF.Simulado>
+
+@{
+    ViewBag.Title = "Simulados";
+    Layout = "~/Views/Shared/DashboardLayout.cshtml";
+}
+
+
+<h1 class="text-light">Meus Simulados <span class="mif-list2 place-right"></span></h1>
+<hr class="thin bg-grayLighter">
+<button class="button primary" onclick="getCat()"><span id="novo" class="mif-plus"></span> Novo Simulado</button>
+<hr class="thin bg-grayLighter">
+<div id="content">
+    @if (Model.Count() == 0)
+    {
+        <p class="text-light">Você ainda não criou nenhum simulado. Crie um para começar...</p>
+    }
+    else
+    {
+        <table class="table border bordered">
+            <thead>
+                <tr>
+                    <td>@Html.DisplayNameFor(model => model.Categorias.Nome)</td>
+                    <td style="width: 100px">@Html.DisplayNameFor(model => model.Data)</td>
+                    <td style="width: 120px">Nota</td>
+                    <td style="width: 80px">Opções</td>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => item.Categorias.Nome)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Data)</td>
+                        <td class="text-center">100% (30/30)</td>
+                        <td class="align-center">
+                            <button class="square-button mini-button">
+                                <span class="mif-file-play" />
+                            </button>
+                            <button class="square-button mini-button">
+                                <span class="mif-file-pdf" />
+                            </button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>
+
+
+@section scripts{
+    <script type="text/javascript">
+        function getCat() {
+            $("#novo").removeClass("mif-plus").addClass("mif-loop2 mif-ani-spin");
+
+            $.getJSON("@Url.Content("~/")Simulados/Categorias")
+            .done(function (json) {
+                $("#content").html("<div class='tile-container' id='tile-container'></div>");
+
+                $.each(json, AppendTile);
+
+                $("#novo").removeClass("mif-loop2 mif-ani-spin").addClass("mif-plus");
+            })
+            .fail(function (jqxhr, textStatus, error) {
+                $("#novo").removeClass("mif-loop2 mif-ani-spin").addClass("mif-plus");
+                $("#content").html("<p class='text-light'>Não foi possível conectar ao servidor. Verifique sua conexão com a internet.</p>");
+            });
+        }
+        function AppendTile(index, item) {
+            $('<div class="tile-wide bg-orange fg-white" data-role="tile">'+
+                '<div class="tile-content" onclick="genSimulado('+ item.Id +')">'+
+                    '<div class="image-container">'+
+                        '<div class="frame">' +
+                            '<img src="@Url.Content("~/Content/Images")/' + item.Imagem +'">'+
+                        '</div>'+
+                        '<div class="image-overlay op-green">'+
+                            '<h2>'+ item.Nome +'</h2>'+
+                            '<p>'+ item.Questoes +' Questões.'+'</p>'+
+                        '</div>'+
+                    '</div>'+
+                '</div>'+
+            '</div>').appendTo("#tile-container").hide().delay(500 * index).fadeIn(500);
+        }
+        function genSimulado(id) {
+            window.location.href = '@Url.Content("~/")Simulados/Novo/' + id;
+        }
+    </script>
+}

@@ -229,12 +229,13 @@
     <Compile Include="Controllers\ContaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\SimuladosController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
-    <Compile Include="EF\Alternativas.cs">
+    <Compile Include="EF\Alternativa.cs">
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
-    <Compile Include="EF\Categorias.cs">
+    <Compile Include="EF\Categoria.cs">
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
     <Compile Include="EF\Database.Context.cs">
@@ -252,19 +253,19 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Database.edmx</DependentUpon>
     </Compile>
-    <Compile Include="EF\Questoes.cs">
+    <Compile Include="EF\Questao.cs">
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
-    <Compile Include="EF\Simulados.cs">
+    <Compile Include="EF\Simulado.cs">
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
     <Compile Include="EF\Simulados_Questoes.cs">
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
-    <Compile Include="EF\Subcategorias.cs">
+    <Compile Include="EF\Subcategoria.cs">
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
-    <Compile Include="EF\Users.cs">
+    <Compile Include="EF\Usuario.cs">
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
@@ -284,6 +285,7 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Categoria.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Simulado.cs" />
@@ -299,6 +301,8 @@
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Images\detran.png" />
+    <Content Include="Content\Images\enem.png" />
     <Content Include="Content\Images\st1.jpg" />
     <Content Include="Content\metro-colors.min.css" />
     <Content Include="Content\metro-icons.min.css" />
@@ -356,6 +360,7 @@
     <Content Include="fonts\metro.woff" />
     <Content Include="fonts\selection.json" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\datatable.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <Content Include="Scripts\metro.min.js" />
@@ -397,6 +402,9 @@
     <Content Include="Views\Manage\ManageLogins.cshtml" />
     <Content Include="Views\Manage\SetPassword.cshtml" />
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
+    <Content Include="Views\Usuario\Simulados.cshtml" />
+    <Content Include="Views\Simulados\View.cshtml" />
+    <Content Include="Views\Simulados\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

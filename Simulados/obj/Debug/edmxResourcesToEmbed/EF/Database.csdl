@@ -1,50 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="LocalDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-  <EntityType Name="Alternativas">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Valor" Type="String" MaxLength="120" FixedLength="true" Unicode="true" />
-    <Property Name="Imagem" Type="String" MaxLength="60" FixedLength="true" Unicode="true" />
-    <NavigationProperty Name="Questoes" Relationship="Self.FK__Questoes__Corret__1BFD2C07" FromRole="Alternativas" ToRole="Questoes" />
-    <NavigationProperty Name="Questoes1" Relationship="Self.Questoes_Alternativas" FromRole="Alternativas" ToRole="Questoes" />
-  </EntityType>
-  <EntityType Name="Categorias">
+  <EntityType Name="Categoria">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Nome" Type="String" MaxLength="120" FixedLength="true" Unicode="true" Nullable="false" />
-    <NavigationProperty Name="Simulados" Relationship="Self.FK__Simulados__Cat__2A4B4B5E" FromRole="Categorias" ToRole="Simulados" />
     <NavigationProperty Name="Subcategorias" Relationship="Self.FK__Subcategori__Pai__20C1E124" FromRole="Categorias" ToRole="Subcategorias" />
-  </EntityType>
-  <EntityType Name="Questoes">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Enunciado" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="Imagem" Type="String" MaxLength="60" FixedLength="true" Unicode="true" />
-    <Property Name="Correta" Type="Int32" Nullable="false" />
-    <Property Name="Cat" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="Alternativas" Relationship="Self.FK__Questoes__Corret__1BFD2C07" FromRole="Questoes" ToRole="Alternativas" />
-    <NavigationProperty Name="Subcategorias" Relationship="Self.FK__Questoes__Cat__24927208" FromRole="Questoes" ToRole="Subcategorias" />
-    <NavigationProperty Name="Simulados_Questoes" Relationship="Self.FK__Simulados__Marca__33D4B598" FromRole="Questoes" ToRole="Simulados_Questoes" />
-    <NavigationProperty Name="Simulados_Questoes1" Relationship="Self.FK__Simulados__Quest__300424B4" FromRole="Questoes" ToRole="Simulados_Questoes" />
-    <NavigationProperty Name="Alternativa_Correta" Relationship="Self.Questoes_Alternativas" FromRole="Questoes" ToRole="Alternativas" />
-  </EntityType>
-  <EntityType Name="Simulados">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Usuario" Type="Int32" Nullable="false" />
-    <Property Name="Data" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="Cat" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="Categorias" Relationship="Self.FK__Simulados__Cat__2A4B4B5E" FromRole="Simulados" ToRole="Categorias" />
-    <NavigationProperty Name="Simulados_Questoes" Relationship="Self.FK__Simulados__Simul__2F10007B" FromRole="Simulados" ToRole="Simulados_Questoes" />
-    <NavigationProperty Name="Users" Relationship="Self.FK__Simulados__Usuar__29572725" FromRole="Simulados" ToRole="Users" />
+    <NavigationProperty Name="Simulados" Relationship="LocalDBModel.FK__Simulados__Cat__2A4B4B5E" FromRole="Categorias" ToRole="Simulados" />
+    <Property Name="Imagem" Type="String" MaxLength="200" FixedLength="true" Unicode="true" />
   </EntityType>
   <EntityType Name="Simulados_Questoes">
     <Key>
@@ -54,11 +18,10 @@
     <Property Name="Simulado" Type="Int32" Nullable="false" />
     <Property Name="Questao" Type="Int32" Nullable="false" />
     <Property Name="Marcada" Type="Int32" />
-    <NavigationProperty Name="Questoes" Relationship="Self.FK__Simulados__Marca__33D4B598" FromRole="Simulados_Questoes" ToRole="Questoes" />
-    <NavigationProperty Name="Questoes1" Relationship="Self.FK__Simulados__Quest__300424B4" FromRole="Simulados_Questoes" ToRole="Questoes" />
-    <NavigationProperty Name="Simulados" Relationship="Self.FK__Simulados__Simul__2F10007B" FromRole="Simulados_Questoes" ToRole="Simulados" />
+    <NavigationProperty Name="Simulados" Relationship="LocalDBModel.FK__Simulados__Simul__2F10007B" FromRole="Simulados_Questoes" ToRole="Simulados" />
+    <NavigationProperty Name="Questoes" Relationship="LocalDBModel.FK__Simulados__Quest__300424B4" FromRole="Simulados_Questoes" ToRole="Questoes" />
   </EntityType>
-  <EntityType Name="Subcategorias">
+  <EntityType Name="Subcategoria">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
@@ -67,47 +30,11 @@
     <Property Name="Pai" Type="Int32" Nullable="false" />
     <Property Name="Qtd" Type="Int32" Nullable="false" />
     <NavigationProperty Name="Categorias" Relationship="Self.FK__Subcategori__Pai__20C1E124" FromRole="Subcategorias" ToRole="Categorias" />
-    <NavigationProperty Name="Questoes" Relationship="Self.FK__Questoes__Cat__24927208" FromRole="Subcategorias" ToRole="Questoes" />
+    <NavigationProperty Name="Questoes" Relationship="LocalDBModel.FK__Questoes__Cat__24927208" FromRole="Subcategorias" ToRole="Questoes" />
   </EntityType>
-  <EntityType Name="Users">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Nome" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="Email" Type="String" MaxLength="120" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="Snh" Type="String" MaxLength="120" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="Ativo" Type="Byte" Nullable="false" />
-    <Property Name="Admin" Type="Byte" Nullable="false" />
-    <NavigationProperty Name="Simulados" Relationship="Self.FK__Simulados__Usuar__29572725" FromRole="Users" ToRole="Simulados" />
-  </EntityType>
-  <Association Name="FK__Questoes__Corret__1BFD2C07">
-    <End Role="Alternativas" Type="Self.Alternativas" Multiplicity="1" />
-    <End Role="Questoes" Type="Self.Questoes" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Alternativas">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Questoes">
-        <PropertyRef Name="Correta" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__Simulados__Cat__2A4B4B5E">
-    <End Role="Categorias" Type="Self.Categorias" Multiplicity="1" />
-    <End Role="Simulados" Type="Self.Simulados" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Categorias">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Simulados">
-        <PropertyRef Name="Cat" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK__Subcategori__Pai__20C1E124">
-    <End Role="Categorias" Type="Self.Categorias" Multiplicity="1" />
-    <End Role="Subcategorias" Type="Self.Subcategorias" Multiplicity="*" />
+    <End Role="Categorias" Type="LocalDBModel.Categoria" Multiplicity="1" />
+    <End Role="Subcategorias" Type="LocalDBModel.Subcategoria" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Categorias">
         <PropertyRef Name="Id" />
@@ -117,9 +44,162 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <EntityContainer Name="LocalDBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Categorias" EntityType="LocalDBModel.Categoria" />
+    <EntitySet Name="Simulados_Questoes" EntityType="Self.Simulados_Questoes" />
+    <EntitySet Name="Subcategorias" EntityType="LocalDBModel.Subcategoria" />
+    <AssociationSet Name="FK__Subcategori__Pai__20C1E124" Association="Self.FK__Subcategori__Pai__20C1E124">
+      <End Role="Categorias" EntitySet="Categorias" />
+      <End Role="Subcategorias" EntitySet="Subcategorias" />
+    </AssociationSet>
+    <FunctionImport Name="GeraSimulado">
+      <Parameter Name="usuario" Mode="In" Type="String" />
+      <Parameter Name="categoria" Mode="In" Type="Int32" />
+      <Parameter Name="IdSimulado" Mode="InOut" Type="Int32" />
+    </FunctionImport>
+    <EntitySet Name="Simulados" EntityType="LocalDBModel.Simulado" />
+    <AssociationSet Name="FK__Simulados__Cat__2A4B4B5E" Association="LocalDBModel.FK__Simulados__Cat__2A4B4B5E">
+      <End Role="Categorias" EntitySet="Categorias" />
+      <End Role="Simulados" EntitySet="Simulados" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Simulados__Simul__2F10007B" Association="LocalDBModel.FK__Simulados__Simul__2F10007B">
+      <End Role="Simulados" EntitySet="Simulados" />
+      <End Role="Simulados_Questoes" EntitySet="Simulados_Questoes" />
+    </AssociationSet>
+    <EntitySet Name="AspNetUsers" EntityType="LocalDBModel.Usuario" />
+    <AssociationSet Name="FK__Simulados__Usuar__6E01572D" Association="LocalDBModel.FK__Simulados__Usuar__6E01572D">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="Simulados" EntitySet="Simulados" />
+    </AssociationSet>
+    <EntitySet Name="Alternativas" EntityType="LocalDBModel.Alternativa" />
+    <EntitySet Name="Questoes" EntityType="LocalDBModel.Questao" />
+    <AssociationSet Name="FK__Questoes__Corret__1BFD2C07" Association="LocalDBModel.FK__Questoes__Corret__1BFD2C07">
+      <End Role="Alternativa" EntitySet="Alternativas" />
+      <End Role="Questoes" EntitySet="Questoes" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Questoes__Cat__24927208" Association="LocalDBModel.FK__Questoes__Cat__24927208">
+      <End Role="Subcategorias" EntitySet="Subcategorias" />
+      <End Role="Questoes" EntitySet="Questoes" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Simulados__Marca__33D4B598" Association="LocalDBModel.FK__Simulados__Marca__33D4B598">
+      <End Role="Questoes" EntitySet="Questoes" />
+      <End Role="Simulados_Questoes" EntitySet="Simulados_Questoes" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Simulados__Quest__300424B4" Association="LocalDBModel.FK__Simulados__Quest__300424B4">
+      <End Role="Questoes" EntitySet="Questoes" />
+      <End Role="Simulados_Questoes" EntitySet="Simulados_Questoes" />
+    </AssociationSet>
+    <AssociationSet Name="Questoes_Alternativas" Association="LocalDBModel.Questoes_Alternativas">
+      <End Role="Alternativa" EntitySet="Alternativas" />
+      <End Role="Questoes" EntitySet="Questoes" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Simulado">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Usuario" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Data" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Cat" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Categorias" Relationship="LocalDBModel.FK__Simulados__Cat__2A4B4B5E" FromRole="Simulados" ToRole="Categorias" />
+    <NavigationProperty Name="Questoes" Relationship="LocalDBModel.FK__Simulados__Simul__2F10007B" FromRole="Simulados" ToRole="Simulados_Questoes" />
+    <NavigationProperty Name="Usuarios" Relationship="LocalDBModel.FK__Simulados__Usuar__6E01572D" FromRole="Simulados" ToRole="AspNetUsers" />
+  </EntityType>
+  <Association Name="FK__Simulados__Cat__2A4B4B5E">
+    <End Type="LocalDBModel.Categoria" Role="Categorias" Multiplicity="1" />
+    <End Type="LocalDBModel.Simulado" Role="Simulados" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Categorias">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Simulados">
+        <PropertyRef Name="Cat" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Simulados__Simul__2F10007B">
+    <End Type="LocalDBModel.Simulado" Role="Simulados" Multiplicity="1" />
+    <End Type="LocalDBModel.Simulados_Questoes" Role="Simulados_Questoes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Simulados">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Simulados_Questoes">
+        <PropertyRef Name="Simulado" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Usuario">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+    <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+    <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+    <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+    <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+    <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+    <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Picture" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Locale" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Simulados" Relationship="LocalDBModel.FK__Simulados__Usuar__6E01572D" FromRole="AspNetUsers" ToRole="Simulados" />
+  </EntityType>
+  <Association Name="FK__Simulados__Usuar__6E01572D">
+    <End Type="LocalDBModel.Usuario" Role="AspNetUsers" Multiplicity="1" />
+    <End Type="LocalDBModel.Simulado" Role="Simulados" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Simulados">
+        <PropertyRef Name="Usuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Alternativa">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Valor" Type="String" MaxLength="120" FixedLength="true" Unicode="true" />
+    <Property Name="Imagem" Type="String" MaxLength="60" FixedLength="true" Unicode="true" />
+    <NavigationProperty Name="Questoes" Relationship="LocalDBModel.Questoes_Alternativas" FromRole="Alternativa" ToRole="Questoes" />
+  </EntityType>
+  <EntityType Name="Questao">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Enunciado" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Imagem" Type="String" MaxLength="60" FixedLength="true" Unicode="true" />
+    <Property Name="Correta" Type="Int32" Nullable="false" />
+    <Property Name="Cat" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Subcategorias" Relationship="LocalDBModel.FK__Questoes__Cat__24927208" FromRole="Questoes" ToRole="Subcategorias" />
+    <NavigationProperty Name="Questoes" Relationship="LocalDBModel.FK__Simulados__Quest__300424B4" FromRole="Questoes" ToRole="Simulados_Questoes" />
+    <NavigationProperty Name="Alternativas" Relationship="LocalDBModel.Questoes_Alternativas" FromRole="Questoes" ToRole="Alternativa" />
+  </EntityType>
+  <Association Name="FK__Questoes__Corret__1BFD2C07">
+    <End Type="LocalDBModel.Alternativa" Role="Alternativa" Multiplicity="1" />
+    <End Type="LocalDBModel.Questao" Role="Questoes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Alternativa">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Questoes">
+        <PropertyRef Name="Correta" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK__Questoes__Cat__24927208">
-    <End Role="Subcategorias" Type="Self.Subcategorias" Multiplicity="1" />
-    <End Role="Questoes" Type="Self.Questoes" Multiplicity="*" />
+    <End Type="LocalDBModel.Subcategoria" Role="Subcategorias" Multiplicity="1" />
+    <End Type="LocalDBModel.Questao" Role="Questoes" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Subcategorias">
         <PropertyRef Name="Id" />
@@ -130,8 +210,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK__Simulados__Marca__33D4B598">
-    <End Role="Questoes" Type="Self.Questoes" Multiplicity="0..1" />
-    <End Role="Simulados_Questoes" Type="Self.Simulados_Questoes" Multiplicity="*" />
+    <End Type="LocalDBModel.Questao" Role="Questoes" Multiplicity="0..1" />
+    <End Type="LocalDBModel.Simulados_Questoes" Role="Simulados_Questoes" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Questoes">
         <PropertyRef Name="Id" />
@@ -142,8 +222,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK__Simulados__Quest__300424B4">
-    <End Role="Questoes" Type="Self.Questoes" Multiplicity="1" />
-    <End Role="Simulados_Questoes" Type="Self.Simulados_Questoes" Multiplicity="*" />
+    <End Type="LocalDBModel.Questao" Role="Questoes" Multiplicity="1" />
+    <End Type="LocalDBModel.Simulados_Questoes" Role="Simulados_Questoes" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Questoes">
         <PropertyRef Name="Id" />
@@ -153,87 +233,8 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Simulados__Simul__2F10007B">
-    <End Role="Simulados" Type="Self.Simulados" Multiplicity="1" />
-    <End Role="Simulados_Questoes" Type="Self.Simulados_Questoes" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Simulados">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Simulados_Questoes">
-        <PropertyRef Name="Simulado" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__Simulados__Usuar__29572725">
-    <End Role="Users" Type="Self.Users" Multiplicity="1" />
-    <End Role="Simulados" Type="Self.Simulados" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Users">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Simulados">
-        <PropertyRef Name="Usuario" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="Questoes_Alternativas">
-    <End Role="Alternativas" Type="Self.Alternativas" Multiplicity="*" />
-    <End Role="Questoes" Type="Self.Questoes" Multiplicity="*" />
+    <End Type="LocalDBModel.Alternativa" Role="Alternativa" Multiplicity="*" />
+    <End Type="LocalDBModel.Questao" Role="Questoes" Multiplicity="*" />
   </Association>
-  <EntityContainer Name="LocalDBEntities" annotation:LazyLoadingEnabled="true">
-    <EntitySet Name="Alternativas" EntityType="Self.Alternativas" />
-    <EntitySet Name="Categorias" EntityType="Self.Categorias" />
-    <EntitySet Name="Questoes" EntityType="Self.Questoes" />
-    <EntitySet Name="Simulados" EntityType="Self.Simulados" />
-    <EntitySet Name="Simulados_Questoes" EntityType="Self.Simulados_Questoes" />
-    <EntitySet Name="Subcategorias" EntityType="Self.Subcategorias" />
-    <EntitySet Name="Users" EntityType="Self.Users" />
-    <AssociationSet Name="FK__Questoes__Corret__1BFD2C07" Association="Self.FK__Questoes__Corret__1BFD2C07">
-      <End Role="Alternativas" EntitySet="Alternativas" />
-      <End Role="Questoes" EntitySet="Questoes" />
-    </AssociationSet>
-    <AssociationSet Name="FK__Simulados__Cat__2A4B4B5E" Association="Self.FK__Simulados__Cat__2A4B4B5E">
-      <End Role="Categorias" EntitySet="Categorias" />
-      <End Role="Simulados" EntitySet="Simulados" />
-    </AssociationSet>
-    <AssociationSet Name="FK__Subcategori__Pai__20C1E124" Association="Self.FK__Subcategori__Pai__20C1E124">
-      <End Role="Categorias" EntitySet="Categorias" />
-      <End Role="Subcategorias" EntitySet="Subcategorias" />
-    </AssociationSet>
-    <AssociationSet Name="FK__Questoes__Cat__24927208" Association="Self.FK__Questoes__Cat__24927208">
-      <End Role="Subcategorias" EntitySet="Subcategorias" />
-      <End Role="Questoes" EntitySet="Questoes" />
-    </AssociationSet>
-    <AssociationSet Name="FK__Simulados__Marca__33D4B598" Association="Self.FK__Simulados__Marca__33D4B598">
-      <End Role="Questoes" EntitySet="Questoes" />
-      <End Role="Simulados_Questoes" EntitySet="Simulados_Questoes" />
-    </AssociationSet>
-    <AssociationSet Name="FK__Simulados__Quest__300424B4" Association="Self.FK__Simulados__Quest__300424B4">
-      <End Role="Questoes" EntitySet="Questoes" />
-      <End Role="Simulados_Questoes" EntitySet="Simulados_Questoes" />
-    </AssociationSet>
-    <AssociationSet Name="FK__Simulados__Simul__2F10007B" Association="Self.FK__Simulados__Simul__2F10007B">
-      <End Role="Simulados" EntitySet="Simulados" />
-      <End Role="Simulados_Questoes" EntitySet="Simulados_Questoes" />
-    </AssociationSet>
-    <AssociationSet Name="FK__Simulados__Usuar__29572725" Association="Self.FK__Simulados__Usuar__29572725">
-      <End Role="Users" EntitySet="Users" />
-      <End Role="Simulados" EntitySet="Simulados" />
-    </AssociationSet>
-    <AssociationSet Name="Questoes_Alternativas" Association="Self.Questoes_Alternativas">
-      <End Role="Alternativas" EntitySet="Alternativas" />
-      <End Role="Questoes" EntitySet="Questoes" />
-    </AssociationSet>
-    <FunctionImport Name="GeraSimulado">
-      <Parameter Name="usuario" Mode="In" Type="Int32" />
-      <Parameter Name="categoria" Mode="In" Type="Int32" />
-    </FunctionImport>
-    <FunctionImport Name="GetAlternativasSimulado">
-      <Parameter Name="id" Mode="In" Type="Int32" />
-    </FunctionImport>
-    <FunctionImport Name="GetSimulado">
-      <Parameter Name="id" Mode="In" Type="Int32" />
-    </FunctionImport>
-  </EntityContainer>
 </Schema>

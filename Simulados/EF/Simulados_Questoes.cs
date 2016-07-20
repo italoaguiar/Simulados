@@ -18,8 +18,7 @@ namespace Simulados.EF
         public int Questao { get; set; }
         public Nullable<int> Marcada { get; set; }
     
-        public virtual Questoes Questoes { get; set; }
-        public virtual Questoes Questoes1 { get; set; }
-        public virtual Simulados Simulados { get; set; }
+        public virtual Simulado Simulados { get; set; }
+        public virtual Questao Questoes { get; set; }
     }
 }

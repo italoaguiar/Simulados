@@ -6,32 +6,17 @@ using System.Threading.Tasks;
 
 namespace Simulados.Models
 {
-    public class Simulado
-    {
-        public string Categoria { get; set; }
-        public List<Questao> Questoes { get; set; }
-    }
-
     public class Questao
     {
+        public int Id { get; set; }
         public string Enunciado { get; set; }
         public string Imagem { get; set; }
         public List<Alternativa> Alternativas { get; set; }
-
-        public Alternativa AlternativaCorreta
-        {
-            get
-            {
-                return null;
-            }
-
-            set
-            {
-            }
-        }
+        public int Selecionada { get; set; }
     }
     public class Alternativa
     {
+        public int Id { get; set; }
         public string Enunciado { get; set; }
         public string Imagem { get; set; }
     }
