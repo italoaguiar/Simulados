@@ -54,17 +54,17 @@
             for(i = 0; i< json.length; i++ ){
                 $("#questions").append("<button id='q"+i+"' onclick='setQ("+i+
                     ")' class='button mini-button danger'>"+ (i + 1) +"</button>");
-            } 
+            }
             setQ(0);
         }
         function setQ(id){
             $("#enunciado").html(questoes[id].Enunciado).hide().fadeIn(500);
             $("#alternativas").html("").hide();
-            
+
             for(i = 0; i< questoes[id].Alternativas.length; i++){
                 $("<input name='alt' type='radio' onclick='setVal("+
-                    questoes[id].Alternativas[i].Id +"," + id + ")' id='a"+ 
-                    questoes[id].Alternativas[i].Id + "' value=" + 
+                    questoes[id].Alternativas[i].Id +"," + id + ")' id='a"+
+                    questoes[id].Alternativas[i].Id + "' value=" +
                     questoes[id].Alternativas[i].Id + " />" +
                     questoes[id].Alternativas[i].Enunciado + "<br/>").appendTo("#alternativas");
             }
@@ -74,6 +74,18 @@
         function setVal(alt, q){
             questoes[q].Selecionada = alt;
             $("#q"+q).removeClass("danger");
+        }
+        function submit(){
+            console.log("passou por aqui");
+            $.ajax({
+                url: '@Url.Content("~/")Simulados/Submit',
+                type: 'post',
+                contentType: "application/json; charset=utf-8",
+                success: function (data){
+                    alert(data);
+                },
+                data: JSON.stringify(questoes)
+            })
         }
     </script>
 }

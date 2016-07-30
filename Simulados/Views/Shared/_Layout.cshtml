@@ -43,25 +43,11 @@
                         <li class="divider"></li>
                     </ul>
                 </li>
-                <li><a href="">Ajuda</a></li>
+                <li><a href="">Contato</a></li>
             </ul>
 
             <div class="app-bar-element place-right">
-                <span class="dropdown-toggle"><span class="mif-cog"></span> Olá @ViewBag.UserName</span>
-                <div class="app-bar-drop-container padding10 place-right no-margin-top block-shadow fg-dark" data-role="dropdown" data-no-close="true" style="width: 220px">
-                    <h2 class="text-light">Quick settings</h2>
-                    <ul class="unstyled-list fg-dark">
-                        <li><a href="" class="fg-white1 fg-hover-yellow">Profile</a></li>
-                        <li><a href="" class="fg-white2 fg-hover-yellow">Security</a></li>
-                        <li>
-                            @using (Html.BeginForm("LogOff", "Conta", FormMethod.Post))
-                            {
-                                @Html.AntiForgeryToken()
-                                <input type="submit" value="Sair" class="link fg-white3 fg-hover-yellow" />
-                            }
-                        </li>
-                    </ul>
-                </div>
+                @Html.Partial("_LoginPartial")
             </div>
         </div>
     </header>

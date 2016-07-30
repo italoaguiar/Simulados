@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using Simulados.EF;
 using Microsoft.AspNet.Identity;
 using System.Data.Entity.Core.Objects;
+using System.Diagnostics;
 
 namespace Simulados.Controllers
 {
@@ -70,6 +71,12 @@ namespace Simulados.Controllers
             };
             
             return Json(rst, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult Submit(List<Models.Questao> questoes)
+        {
+            Debug.WriteLine(Request);
+            return Json(questoes);
         }
 
 
