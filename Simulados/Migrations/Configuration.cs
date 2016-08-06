@@ -9,8 +9,7 @@ namespace Simulados.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = true;
-            ContextKey = "Simulados.Models.ApplicationDbContext";
+            AutomaticMigrationsEnabled = false;
         }
 
         protected override void Seed(Simulados.Models.ApplicationDbContext context)

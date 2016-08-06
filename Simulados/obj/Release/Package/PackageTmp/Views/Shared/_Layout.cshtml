@@ -1,0 +1,72 @@
+﻿@using Microsoft.AspNet.Identity
+@using Simulados.Models
+@using Microsoft.AspNet.Identity.EntityFramework
+
+@{
+    var manager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
+    var currentUser = manager.FindById(User.Identity.GetUserId());
+    if (currentUser != null)
+    {
+        ViewBag.UserName = currentUser.Name;
+    }
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>@ViewBag.Title</title>
+
+    @Styles.Render("~/Content/css")
+
+
+</head>
+<body class="bg-steel">
+    <header class="app-bar fixed-top green" data-role="appbar">        
+        <div class="container">
+            <a class="app-bar-element branding">Simulados.com</a>
+            <span class="app-bar-divider"></span>
+            <ul class="app-bar-menu">
+                <li><a href="">Início</a></li>
+                <li><a href="">Contato</a></li>
+            </ul>
+
+            <div class="app-bar-element place-right">
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </header>
+    
+
+    <div class="page-content">
+        @RenderBody()
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+
+    <script>
+        function pushMessage(t){
+            var mes = 'Info|Implement independently';
+            $.Notify({
+                caption: mes.split("|")[0],
+                content: mes.split("|")[1],
+                type: t
+            });
+        }
+
+        $(function(){
+            $('.sidebar').on('click', 'li', function(){
+                if (!$(this).hasClass('active')) {
+                    $('.sidebar li').removeClass('active');
+                    $(this).addClass('active');
+                }
+            })
+        })
+    </script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

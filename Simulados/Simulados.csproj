@@ -364,6 +364,8 @@
     <Content Include="fonts\metro.ttf" />
     <Content Include="fonts\metro.woff" />
     <Content Include="fonts\selection.json" />
+    <None Include="Properties\PublishProfiles\azure.pubxml" />
+    <None Include="Properties\PublishProfiles\simulados.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\datatable.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />

@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="LocalDBModelStoreContainer" CdmEntityContainer="LocalDBEntities">
+    <EntitySetMapping Name="Categorias">
+      <EntityTypeMapping TypeName="LocalDBModel.Categoria">
+        <MappingFragment StoreEntitySet="Categorias">
+          <ScalarProperty Name="Imagem" ColumnName="Imagem" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Nome" ColumnName="Nome" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Subcategorias">
+      <EntityTypeMapping TypeName="LocalDBModel.Subcategoria">
+        <MappingFragment StoreEntitySet="Subcategorias">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Nome" ColumnName="Nome" />
+          <ScalarProperty Name="Pai" ColumnName="Pai" />
+          <ScalarProperty Name="Qtd" ColumnName="Qtd" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="GeraSimulado" FunctionName="LocalDBModel.Store.GeraSimulado" />
+    <EntitySetMapping Name="AspNetUsers">
+      <EntityTypeMapping TypeName="LocalDBModel.Usuario">
+        <MappingFragment StoreEntitySet="AspNetUsers">
+          <ScalarProperty Name="Locale" ColumnName="Locale" />
+          <ScalarProperty Name="Picture" ColumnName="Picture" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+          <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+          <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+          <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+          <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+          <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+          <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Alternativas">
+      <EntityTypeMapping TypeName="LocalDBModel.Alternativa">
+        <MappingFragment StoreEntitySet="Alternativas">
+          <ScalarProperty Name="Imagem" ColumnName="Imagem" />
+          <ScalarProperty Name="Valor" ColumnName="Valor" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Questoes">
+      <EntityTypeMapping TypeName="LocalDBModel.Questao">
+        <MappingFragment StoreEntitySet="Questoes">
+          <ScalarProperty Name="Cat" ColumnName="Cat" />
+          <ScalarProperty Name="Correta" ColumnName="Correta" />
+          <ScalarProperty Name="Imagem" ColumnName="Imagem" />
+          <ScalarProperty Name="Enunciado" ColumnName="Enunciado" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="Questoes_Alternativas" TypeName="LocalDBModel.Questoes_Alternativas" StoreEntitySet="Questoes_Alternativas">
+      <EndProperty Name="Questoes">
+        <ScalarProperty Name="Id" ColumnName="Questao" />
+      </EndProperty>
+      <EndProperty Name="Alternativa">
+        <ScalarProperty Name="Id" ColumnName="Alternativa" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <EntitySetMapping Name="Simulados_Questoes">
+      <EntityTypeMapping TypeName="LocalDBModel.Simulados_Questoes">
+        <MappingFragment StoreEntitySet="Simulados_Questoes">
+          <ScalarProperty Name="Marcada" ColumnName="Marcada" />
+          <ScalarProperty Name="Questao" ColumnName="Questao" />
+          <ScalarProperty Name="Simulado" ColumnName="Simulado" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Simulados">
+      <EntityTypeMapping TypeName="LocalDBModel.Simulado">
+        <MappingFragment StoreEntitySet="Simulados">
+          <ScalarProperty Name="Submissao" ColumnName="Submissao" />
+          <ScalarProperty Name="Cat" ColumnName="Cat" />
+          <ScalarProperty Name="Data" ColumnName="Data" />
+          <ScalarProperty Name="Usuario" ColumnName="Usuario" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
