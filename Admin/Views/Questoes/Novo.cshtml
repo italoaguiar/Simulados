@@ -14,7 +14,7 @@
 <h2>@ViewBag.Title</h2>
 
 
-@using (Html.BeginForm("Novo", "Questoes", FormMethod.Get))
+@using (Html.BeginForm("Save", "Questoes", FormMethod.Post))
 {
         @Html.AntiForgeryToken()
 
@@ -23,50 +23,54 @@
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
             @Html.LabelFor(model => model.Enunciado, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.TextAreaFor(model => model.Enunciado, new { @class = "form-control", rows = 3 } )
-                @Html.ValidationMessageFor(model => model.Enunciado, "", new { @class = "text-danger" })
+            <div class="col-md-4">
+                @Html.TextAreaFor(model => model.Enunciado, new { @class = "form-control", rows = 3, style= "width: 100%;box-sizing: border-box;" } )
             </div>
         </div>
-
         <div class="form-group">
-            @Html.LabelFor(model => model.Imagem, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Imagem, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Imagem, "", new { @class = "text-danger" })
+            <label for="categoria" class="control-label col-md-2">Categoria</label>
+            <div class="col-md-4">
+                <select id="categoria" name="categoria" class="form-control">
+                    @foreach (var item in ViewBag.Categorias)
+                    {
+                        <option value="@item.Id">@item.Nome</option>
+                    }                    
+                </select>
             </div>
         </div>
-
+        <div class="form-group">
+            <label for="subcategoria" class="control-label col-md-2">Subcategoria</label>
+            <div class="col-md-4">
+                <select id="subcategoria" name="subcategoria" class="form-control">
+                    <option></option>
+                </select>
+            </div>
+        </div>
         <div class="form-group">
             <label for="alt" class="control-label col-md-2">Alternativas</label>
             <div class="col-md-4">
-                <input class="form-control" type="text" id="alt" />                
-            </div> 
+                <a href="#" class="btn btn-default form-control" data-toggle="modal" data-target="#alts" >Adicionar</a>   
+                <br/><br/>
+                <div id="alt-group">
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="correta" class="control-label col-md-2">Correta</label>
             <div class="col-md-4">
-                <input class="form-control" type="button" value="Adicionar" />
-            </div>           
+                <select id="correta" name="correta" class="form-control">
+                </select>
+            </div>
         </div>
 
-        @for(int i = 0; i< 4; i++)
-        {
-            <input type="hidden" name="alternativa" value="@i" />
-        }
-
-        @*<div class="form-group">
-            @Html.LabelFor(model => model.Correta, "Correta", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("Correta", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.Correta, "", new { @class = "text-danger" })
+        <div class="form-group">
+            <label for="correta" class="control-label col-md-2">Imagem</label>
+            <div class="col-md-4">
+                <input type="hidden" id="imagem" name="imagem"/>
+                <input type="file" id="uploadImage"  />
             </div>
-        </div>*@
-
-        @*<div class="form-group">
-            @Html.LabelFor(model => model.Cat, "Cat", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("Cat", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.Cat, "", new { @class = "text-danger" })
-            </div>
-        </div>*@
+        </div>
+       
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
@@ -76,10 +80,40 @@
     </div>
 }
 
+<!-- Modal -->
+<div class="modal fade" id="alts" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Adicionar Alternativa</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label class="control-label" for="alternativa">Valor</label>
+                    <input type="text" class="form-control" id="alternativa" name="alternativa" />
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="imagem">Imagem</label>
+                    <input type="file" id="uploadAltImage" name="imagem" />
+                    <input type="hidden" id="imageName"/>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a href="#" id="subAlt" type="button" class="btn btn-default" data-dismiss="modal">Ok</a>
+            </div>
+        </div>
+
+    </div>
+</div>
+
 <div>
     @Html.ActionLink("Voltar", "Index")
 </div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript" src="~/Scripts/Questoes.js"></script>
 }
