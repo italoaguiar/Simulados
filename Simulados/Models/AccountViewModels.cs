@@ -65,7 +65,7 @@ namespace Simulados.Models
     public class RegisterViewModel
     {
         [Required]
-        [StringLength(30,ErrorMessage = "O {0} deve der no mínimo {2} caracteres.", MinimumLength =2)]
+        [StringLength(30,ErrorMessage = "O {0} deve ter no mínimo {2} caracteres.", MinimumLength =2)]
         [Display(Name = "Nome")]
         public string Name { get; set; }
 

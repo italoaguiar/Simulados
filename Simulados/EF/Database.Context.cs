@@ -28,12 +28,12 @@ namespace Simulados.EF
         }
     
         public virtual DbSet<Categoria> Categorias { get; set; }
-        public virtual DbSet<Simulados_Questoes> Simulados_Questoes { get; set; }
         public virtual DbSet<Subcategoria> Subcategorias { get; set; }
-        public virtual DbSet<Simulado> Simulados { get; set; }
         public virtual DbSet<Usuario> AspNetUsers { get; set; }
         public virtual DbSet<Alternativa> Alternativas { get; set; }
         public virtual DbSet<Questao> Questoes { get; set; }
+        public virtual DbSet<Simulados_Questoes> Simulados_Questoes { get; set; }
+        public virtual DbSet<Simulado> Simulados { get; set; }
     
         public virtual int GeraSimulado(string usuario, Nullable<int> categoria, ObjectParameter idSimulado)
         {

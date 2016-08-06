@@ -5,22 +5,22 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="ca36335d9dd840ee85d1dd2ee11f3a14" Name="Diagram1">
-        <EntityTypeShape EntityType="LocalDBModel.Categoria" Width="1.5" PointX="2.875" PointY="4.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="LocalDBModel.Simulados_Questoes" Width="1.5" PointX="5" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="LocalDBModel.Subcategoria" Width="1.5" PointX="4.875" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="LocalDBModel.Categoria" Width="1.5" PointX="2.5" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LocalDBModel.Subcategoria" Width="1.5" PointX="4.25" PointY="3.75" IsExpanded="true" />
         <AssociationConnector Association="LocalDBModel.FK__Subcategori__Pai__20C1E124" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="LocalDBModel.Simulado" Width="1.5" PointX="2.875" PointY="0.75" />
-        <AssociationConnector Association="LocalDBModel.FK__Simulados__Cat__2A4B4B5E" />
-        <AssociationConnector Association="LocalDBModel.FK__Simulados__Simul__2F10007B" />
         <EntityTypeShape EntityType="LocalDBModel.Usuario" Width="1.5" PointX="0.625" PointY="0.75" />
-        <AssociationConnector Association="LocalDBModel.FK__Simulados__Usuar__6E01572D" />
-        <EntityTypeShape EntityType="LocalDBModel.Alternativa" Width="1.5" PointX="7.75" PointY="4.375" />
-        <EntityTypeShape EntityType="LocalDBModel.Questao" Width="1.5" PointX="7.625" PointY="0.75" />
+        <EntityTypeShape EntityType="LocalDBModel.Alternativa" Width="1.5" PointX="6.125" PointY="3.75" />
+        <EntityTypeShape EntityType="LocalDBModel.Questao" Width="1.5" PointX="6.125" PointY="0.75" />
         <AssociationConnector Association="LocalDBModel.FK__Questoes__Corret__1BFD2C07" />
         <AssociationConnector Association="LocalDBModel.FK__Questoes__Cat__24927208" />
-        <AssociationConnector Association="LocalDBModel.FK__Simulados__Marca__33D4B598" />
-        <AssociationConnector Association="LocalDBModel.FK__Simulados__Quest__300424B4" />
         <AssociationConnector Association="LocalDBModel.Questoes_Alternativas" />
+        <EntityTypeShape EntityType="LocalDBModel.Simulados_Questoes" Width="1.5" PointX="4.25" PointY="0.75" />
+        <AssociationConnector Association="LocalDBModel.FK__Simulados__Marca__14270015" />
+        <AssociationConnector Association="LocalDBModel.FK__Simulados__Quest__03F0984C" />
+        <EntityTypeShape EntityType="LocalDBModel.Simulado" Width="1.5" PointX="2.5" PointY="0.75" />
+        <AssociationConnector Association="LocalDBModel.FK__Simulados__Usuar__6E01572D" />
+        <AssociationConnector Association="LocalDBModel.FK__Simulados__Cat__2A4B4B5E" />
+        <AssociationConnector Association="LocalDBModel.FK__Simulados__Simul__02FC7413" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -62,12 +62,13 @@
     <Property Name="Usuario" Type="nvarchar" MaxLength="128" Nullable="false" />
     <Property Name="Data" Type="datetime" Nullable="false" />
     <Property Name="Cat" Type="int" Nullable="false" />
+    <Property Name="Submissao" Type="datetime" />
   </EntityType>
   <EntityType Name="Simulados_Questoes">
     <Key>
-      <PropertyRef Name="Simulado" />
-      <PropertyRef Name="Questao" />
+      <PropertyRef Name="Id" />
     </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Simulado" Type="int" Nullable="false" />
     <Property Name="Questao" Type="int" Nullable="false" />
     <Property Name="Marcada" Type="int" />
@@ -141,11 +142,11 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Simulados__Marca__33D4B598">
-    <End Role="Questoes" Type="Self.Questoes" Multiplicity="0..1" />
+  <Association Name="FK__Simulados__Marca__14270015">
+    <End Role="Alternativas" Type="Self.Alternativas" Multiplicity="0..1" />
     <End Role="Simulados_Questoes" Type="Self.Simulados_Questoes" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Questoes">
+      <Principal Role="Alternativas">
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="Simulados_Questoes">
@@ -153,7 +154,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Simulados__Quest__300424B4">
+  <Association Name="FK__Simulados__Quest__03F0984C">
     <End Role="Questoes" Type="Self.Questoes" Multiplicity="1" />
     <End Role="Simulados_Questoes" Type="Self.Simulados_Questoes" Multiplicity="*" />
     <ReferentialConstraint>
@@ -165,7 +166,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Simulados__Simul__2F10007B">
+  <Association Name="FK__Simulados__Simul__02FC7413">
     <End Role="Simulados" Type="Self.Simulados" Multiplicity="1" />
     <End Role="Simulados_Questoes" Type="Self.Simulados_Questoes" Multiplicity="*" />
     <ReferentialConstraint>
@@ -235,15 +236,15 @@
       <End Role="Categorias" EntitySet="Categorias" />
       <End Role="Simulados" EntitySet="Simulados" />
     </AssociationSet>
-    <AssociationSet Name="FK__Simulados__Marca__33D4B598" Association="Self.FK__Simulados__Marca__33D4B598">
+    <AssociationSet Name="FK__Simulados__Marca__14270015" Association="Self.FK__Simulados__Marca__14270015">
+      <End Role="Alternativas" EntitySet="Alternativas" />
+      <End Role="Simulados_Questoes" EntitySet="Simulados_Questoes" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Simulados__Quest__03F0984C" Association="Self.FK__Simulados__Quest__03F0984C">
       <End Role="Questoes" EntitySet="Questoes" />
       <End Role="Simulados_Questoes" EntitySet="Simulados_Questoes" />
     </AssociationSet>
-    <AssociationSet Name="FK__Simulados__Quest__300424B4" Association="Self.FK__Simulados__Quest__300424B4">
-      <End Role="Questoes" EntitySet="Questoes" />
-      <End Role="Simulados_Questoes" EntitySet="Simulados_Questoes" />
-    </AssociationSet>
-    <AssociationSet Name="FK__Simulados__Simul__2F10007B" Association="Self.FK__Simulados__Simul__2F10007B">
+    <AssociationSet Name="FK__Simulados__Simul__02FC7413" Association="Self.FK__Simulados__Simul__02FC7413">
       <End Role="Simulados" EntitySet="Simulados" />
       <End Role="Simulados_Questoes" EntitySet="Simulados_Questoes" />
     </AssociationSet>

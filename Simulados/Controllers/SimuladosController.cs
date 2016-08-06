@@ -10,6 +10,8 @@ using Simulados.EF;
 using Microsoft.AspNet.Identity;
 using System.Data.Entity.Core.Objects;
 using System.Diagnostics;
+using System.Threading.Tasks;
+using System.Web.Helpers;
 
 namespace Simulados.Controllers
 {
@@ -29,18 +31,17 @@ namespace Simulados.Controllers
         // GET: Simulados/Novo
         public ActionResult Novo(int? id)
         {
-            if(id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
+            if(id == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
             EF.Categoria cat = db.Categorias.Find(id);
-            if(cat == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
+            if(cat == null) return new HttpStatusCodeResult(HttpStatusCode.NotFound);
+
+            //parâmetro de retorno da função que ira retornar o id do novo simulado
             ObjectParameter s_id = new ObjectParameter("IdSimulado", typeof(int));
+
             int? result = db.GeraSimulado(User.Identity.GetUserId(), id, s_id);
 
+            //redireciona para a visualização do novo simulado
             return RedirectToAction("View",new { id = s_id.Value });
         }
 
@@ -50,33 +51,90 @@ namespace Simulados.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+            var simulado = db.Simulados.Where(p => p.Id == id);
+            if (simulado.Count() == 0) return new HttpStatusCodeResult(HttpStatusCode.NotFound);
+
             ViewBag.IdSimulado = id;
-            ViewBag.Title = db.Simulados.Where(p => p.Id == id).First().Categorias.Nome;
+            ViewBag.Title = simulado.First().Categorias.Nome;
             return View();
         }
 
         public JsonResult GetQuestoes(int? id)
         {
-            var rst = from q in db.Simulados_Questoes where q.Simulado == id select new Models.Questao()
+            var sm = db.Simulados.Where(p => p.Id == id);
+            if (sm.Count() == 0) return Json("Not Found", JsonRequestBehavior.AllowGet);
+            if (sm.First().Submissao == null)
             {
-                Id = q.Questoes.Id,
-                Imagem = q.Questoes.Imagem,
-                Enunciado = q.Questoes.Enunciado,
-                Alternativas = (from a in q.Questoes.Alternativas select new Models.Alternativa()
-                {
-                    Id = a.Id,
-                    Enunciado = a.Valor.Trim(),
-                    Imagem = a.Imagem
-                }).ToList()
-            };
-            
-            return Json(rst, JsonRequestBehavior.AllowGet);
+                var rst = from q in db.Simulados_Questoes
+                          where q.Simulado == id
+                          select new Models.Questao()
+                          {
+                              Id = q.Questoes.Id,
+                              Imagem = q.Questoes.Imagem,
+                              Enunciado = q.Questoes.Enunciado,
+                              Alternativas = (from a in q.Questoes.Alternativas
+                                              select new Models.Alternativa()
+                                              {
+                                                  Id = a.Id,
+                                                  Enunciado = a.Valor.Trim(),
+                                                  Imagem = a.Imagem
+                                              }).ToList()
+                          };
+                Models.Resposta r = new Models.Resposta(rst.ToList(), Models.StatusType.Aberto);
+                return Json(r, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+
+                var rst = from q in db.Simulados_Questoes
+                          where q.Simulado == id
+                          select new Models.Questao()
+                          {
+                              Id = q.Questoes.Id,
+                              Imagem = q.Questoes.Imagem,
+                              Enunciado = q.Questoes.Enunciado,
+                              Correta = q.Questoes.Correta,
+                              Selecionada = q.Marcada,
+                              Alternativas = (from a in q.Questoes.Alternativas
+                                              select new Models.Alternativa()
+                                              {
+                                                  Id = a.Id,
+                                                  Enunciado = a.Valor.Trim(),
+                                                  Imagem = a.Imagem
+                                              }).ToList()
+                          };
+                var questoes = rst.ToList();
+                Models.Resposta r = new Models.Resposta(questoes, Models.StatusType.Finalizado);
+                return Json(r, JsonRequestBehavior.AllowGet);
+            }
         }
 
-        public JsonResult Submit(List<Models.Questao> questoes)
+
+        public async Task<JsonResult> Submit(int? simulado, List<Models.Questao> questoes)
         {
-            Debug.WriteLine(Request);
-            return Json(questoes);
+            if(simulado == null)
+            {
+                return Json("Bad Request");
+            }
+            var user = User.Identity.GetUserId();
+            var sm = db.Simulados.First(s => s.Id == simulado && s.Usuario == user);
+            sm.Submissao = DateTime.Now;
+
+            if (sm == null) return Json("Bad Request");
+
+
+            var q = db.Simulados_Questoes.Where(p=> p.Simulado == simulado);
+
+            foreach(var item in q)
+            {
+                int? selecionada = questoes.First(k => k.Id == item.Questao).Selecionada;
+                item.Marcada = selecionada;
+            }
+
+            await db.SaveChangesAsync();
+
+
+            return GetQuestoes(simulado);
         }
 
 

@@ -14,11 +14,13 @@ namespace Simulados.EF
     
     public partial class Simulados_Questoes
     {
+        public int Id { get; set; }
         public int Simulado { get; set; }
         public int Questao { get; set; }
         public Nullable<int> Marcada { get; set; }
     
-        public virtual Simulado Simulados { get; set; }
+        public virtual Alternativa AlternativaMarcada { get; set; }
         public virtual Questao Questoes { get; set; }
+        public virtual Simulado Simulados { get; set; }
     }
 }

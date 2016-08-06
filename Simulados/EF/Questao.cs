@@ -17,8 +17,8 @@ namespace Simulados.EF
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Questao()
         {
-            this.Questoes = new HashSet<Simulados_Questoes>();
             this.Alternativas = new HashSet<Alternativa>();
+            this.Simulados_Questoes = new HashSet<Simulados_Questoes>();
         }
     
         public int Id { get; set; }
@@ -29,8 +29,8 @@ namespace Simulados.EF
     
         public virtual Subcategoria Subcategorias { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Simulados_Questoes> Questoes { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Alternativa> Alternativas { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Simulados_Questoes> Simulados_Questoes { get; set; }
     }
 }

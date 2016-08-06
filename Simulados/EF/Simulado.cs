@@ -11,24 +11,24 @@ namespace Simulados.EF
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
+    
     public partial class Simulado
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Simulado()
         {
-            this.Questoes = new HashSet<Simulados_Questoes>();
+            this.Simulados_Questoes = new HashSet<Simulados_Questoes>();
         }
     
         public int Id { get; set; }
         public string Usuario { get; set; }
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public System.DateTime Data { get; set; }
         public int Cat { get; set; }
+        public Nullable<System.DateTime> Submissao { get; set; }
     
+        public virtual Usuario AspNetUsers { get; set; }
         public virtual Categoria Categorias { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Simulados_Questoes> Questoes { get; set; }
-        public virtual Usuario Usuarios { get; set; }
+        public virtual ICollection<Simulados_Questoes> Simulados_Questoes { get; set; }
     }
 }

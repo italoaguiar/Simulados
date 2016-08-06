@@ -10,15 +10,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Simulados_Questoes">
-      <EntityTypeMapping TypeName="LocalDBModel.Simulados_Questoes">
-        <MappingFragment StoreEntitySet="Simulados_Questoes">
-          <ScalarProperty Name="Simulado" ColumnName="Simulado" />
-          <ScalarProperty Name="Questao" ColumnName="Questao" />
-          <ScalarProperty Name="Marcada" ColumnName="Marcada" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Subcategorias">
       <EntityTypeMapping TypeName="LocalDBModel.Subcategoria">
         <MappingFragment StoreEntitySet="Subcategorias">
@@ -30,16 +21,6 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <FunctionImportMapping FunctionImportName="GeraSimulado" FunctionName="LocalDBModel.Store.GeraSimulado" />
-    <EntitySetMapping Name="Simulados">
-      <EntityTypeMapping TypeName="LocalDBModel.Simulado">
-        <MappingFragment StoreEntitySet="Simulados">
-          <ScalarProperty Name="Cat" ColumnName="Cat" />
-          <ScalarProperty Name="Data" ColumnName="Data" />
-          <ScalarProperty Name="Usuario" ColumnName="Usuario" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="AspNetUsers">
       <EntityTypeMapping TypeName="LocalDBModel.Usuario">
         <MappingFragment StoreEntitySet="AspNetUsers">
@@ -89,5 +70,26 @@
         <ScalarProperty Name="Id" ColumnName="Alternativa" />
       </EndProperty>
     </AssociationSetMapping>
+    <EntitySetMapping Name="Simulados_Questoes">
+      <EntityTypeMapping TypeName="LocalDBModel.Simulados_Questoes">
+        <MappingFragment StoreEntitySet="Simulados_Questoes">
+          <ScalarProperty Name="Marcada" ColumnName="Marcada" />
+          <ScalarProperty Name="Questao" ColumnName="Questao" />
+          <ScalarProperty Name="Simulado" ColumnName="Simulado" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Simulados">
+      <EntityTypeMapping TypeName="LocalDBModel.Simulado">
+        <MappingFragment StoreEntitySet="Simulados">
+          <ScalarProperty Name="Submissao" ColumnName="Submissao" />
+          <ScalarProperty Name="Cat" ColumnName="Cat" />
+          <ScalarProperty Name="Data" ColumnName="Data" />
+          <ScalarProperty Name="Usuario" ColumnName="Usuario" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

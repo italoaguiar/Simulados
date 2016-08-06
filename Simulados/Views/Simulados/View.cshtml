@@ -9,13 +9,13 @@
 
 <h1 class="text-light">@ViewBag.Title <span class="mif-list2 place-right"></span></h1>
 <hr class="thin bg-grayLighter">
-<div class="grid" style="margin:0px;">
+<div class="grid">
     <div class="row cells12">
-        <div id="questions" class="cell colspan10">
+        <div id="questions" class="cell colspan9">
 
         </div>
-        <div class="cell colspan2">
-            <button class="button primary" onclick="submit()"><span id="novo" class="mif-plus"></span> Finalizar Simulado</button>
+        <div class="cell colspan3" style="text-align:right; padding-right:30px">
+            <button id="submit" class="button primary" onclick="submit()"><span id="novo" class="mif-plus"></span> Finalizar Simulado</button>
         </div>
     </div>
 </div>
@@ -28,20 +28,64 @@
        
     </div>
 </div>
+<div data-role="dialog" class="padding20" data-height="400" data-close-button="true" data-windows-style="true" id="submit_dialog">
+    <div class="container">
+        <div class="grid">
+            <div class="row cells12">
+                <div class="cell colspan4">
+                    <div id="chart_div"></div>
+                </div>
+                <div class="cell colspan8">
+                    <h2>Resultado do Simulado</h2>
+                    <hr/>
+                    <div style="text-align:center; font-size: 120pt">
+                        <span id="r">18</span>
+                        <span id="t" style="color:#878787">/20</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 @section scripts{
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
+        function genChart(acertos,erros){
+            google.charts.load('current', {'packages':['corechart']});
+            google.charts.setOnLoadCallback(drawChart);
+
+            function drawChart() {
+                var data = new google.visualization.DataTable();
+                data.addColumn('string', 'Topping');
+                data.addColumn('number', 'Slices');
+                data.addRows([
+                  ['Acertos', acertos],
+                  ['Erros', erros],
+                ]);
+                var options = {'width':400,'height':360, 'chartArea': { width: "100%", height: "95%"},animation:{
+                    duration: 1000,
+                    easing: 'out',
+                },
+                legend: {position: 'none'}};
+                var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+                chart.draw(data, options);
+            }
+        }
+    </script>
+
+    <script type="text/javascript">        
         var questoes;
 
         $(document).ready(function(){
-            $("#cell-sidebar").hide();
+           // $("#cell-sidebar").hide();
 
             $.getJSON("@Url.Content("~/")Simulados/GetQuestoes/" + IdSimulado)
             .done(function (json) {
-                questoes = json;
-
-                parseJson(json);
+                questoes = json.Respostas;                
+                parseJson(questoes);
+                showResult(json);
 
                 $("#novo").removeClass("mif-loop2 mif-ani-spin").addClass("mif-plus");
             })
@@ -49,16 +93,32 @@
                 $("#content").html("<p class='text-light'>Não foi possível conectar ao servidor. Verifique sua conexão com a internet.</p>");
             });
         });
-
+        function showResult(json){
+            if(json.Status != undefined && json.Status == 1){
+                genChart(json.TotalAcertos, json.TotalErros);
+                $("#r").html(json.TotalAcertos);
+                $("#t").html("/" + json.TotalQuestoes);
+                var dialog = $('#submit_dialog').data('dialog');
+                dialog.open();
+                $("#submit").hide();
+            }
+        }
         function parseJson(json){
+            $("#questions").html("");
             for(i = 0; i< json.length; i++ ){
                 $("#questions").append("<button id='q"+i+"' onclick='setQ("+i+
                     ")' class='button mini-button danger'>"+ (i + 1) +"</button>");
+
+
+                if(json[i].Correta != undefined && json[i].Selecionada == json[i].Correta){
+                    $("#q"+i).removeClass("danger");
+                    $("#q"+i).addClass("success");
+                }
             }
             setQ(0);
         }
         function setQ(id){
-            $("#enunciado").html(questoes[id].Enunciado).hide().fadeIn(500);
+            $("#enunciado").html((id + 1) + ") " + questoes[id].Enunciado).hide().fadeIn(500);
             $("#alternativas").html("").hide();
 
             for(i = 0; i< questoes[id].Alternativas.length; i++){
@@ -76,13 +136,14 @@
             $("#q"+q).removeClass("danger");
         }
         function submit(){
-            console.log("passou por aqui");
             $.ajax({
-                url: '@Url.Content("~/")Simulados/Submit',
+                url: '@Url.Content("~/")Simulados/Submit?simulado=' + IdSimulado,
                 type: 'post',
                 contentType: "application/json; charset=utf-8",
                 success: function (data){
-                    alert(data);
+                    questoes = data.Respostas;
+                    parseJson(questoes);
+                    showResult(data);
                 },
                 data: JSON.stringify(questoes)
             })
