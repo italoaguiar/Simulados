@@ -78,6 +78,9 @@
     </div>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    <script type="text/javascript">
+        relativeUri = "@Url.Action("Index")";
+    </script>
     @RenderSection("scripts", required: false)
 </body>
 </html>

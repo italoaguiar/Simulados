@@ -55,3 +55,7 @@ C:\Users\italo\Source\Repos\Simulados\Admin\bin\Antlr3.Runtime.pdb
 C:\Users\italo\Source\Repos\Simulados\Admin\obj\Debug\Admin.csprojResolveAssemblyReference.cache
 C:\Users\italo\Source\Repos\Simulados\Admin\obj\Debug\Admin.dll
 C:\Users\italo\Source\Repos\Simulados\Admin\obj\Debug\Admin.pdb
+C:\Users\italo\Source\Repos\Simulados\Admin\bin\PagedList.dll
+C:\Users\italo\Source\Repos\Simulados\Admin\bin\PagedList.Mvc.dll
+C:\Users\italo\Source\Repos\Simulados\Admin\bin\PagedList.xml
+C:\Users\italo\Source\Repos\Simulados\Admin\bin\PagedList.Mvc.xml

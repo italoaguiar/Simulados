@@ -30,6 +30,16 @@ namespace Simulados
                 "~/Content/metro-rtl.min.css",
                 "~/Content/metro-schemes.min.css",
                 "~/Content/site.css"));
+
+
+
+            bundles.Add(new ScriptBundle("~/Areas/Admin/bundles/bootstrap").Include(
+                      "~/Areas/Admin/Scripts/bootstrap.js",
+                      "~/Areas/Admin/Scripts/respond.js"));
+
+            bundles.Add(new StyleBundle("~/Areas/Admin/Content/css").Include(
+                      "~/Areas/Admin/Content/bootstrap.css",
+                      "~/Areas/Admin/Content/site.css"));
         }
     }
 }

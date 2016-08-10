@@ -47,6 +47,7 @@
                 @Html.ActionLink("Cancelar","Index","Home",null,new { @class = "button link"})
             </div>
             <hr/>
+            @Html.ActionLink("Não é cadastrado? Registre-se!", "Register");
             @*@Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })*@
         }
     </div>

@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using PagedList;
 
 namespace Admin.Controllers
 {
@@ -13,9 +14,14 @@ namespace Admin.Controllers
         EF.DBConnection db = new EF.DBConnection();
         
         // GET: Questoes
-        public ActionResult Index()
+        public ActionResult Index(int? page)
         {
-            return View(db.Questoes.ToArray());
+            int pageSize = 8;
+            int pageNumber = (page ?? 1);
+
+            var items = db.Questoes.ToArray();
+
+            return View(items.ToPagedList(pageNumber, pageSize));
         }
 
         public ContentResult AddAlternativa(string alternativa, string imagem)
@@ -23,8 +29,9 @@ namespace Admin.Controllers
             try
             {
                 EF.Alternativas a = new EF.Alternativas();
-                a.Valor = alternativa;
+                a.Valor = alternativa;               
                 a.Imagem = string.IsNullOrEmpty(imagem)? null : imagem;
+
                 db.Alternativas.Add(a);
                 db.SaveChanges();
                 return Content(a.Id.ToString());
@@ -98,16 +105,19 @@ namespace Admin.Controllers
             return Redirect("Index");            
         }
 
+        public ActionResult Editar(int? id)
+        {
+            var item = db.Questoes.Find(id);
+            ViewBag.Categorias = db.Categorias.Where(p=> p.Id != item.Subcategorias.Categorias.Id).ToList();
+            ViewBag.SubCategorias = db.Subcategorias.Where(p => p.Id != item.Cat && p.Pai == item.Subcategorias.Categorias.Id).ToList();
+
+            return View(item);
+        }
+
         public ActionResult Novo()
         {
             ViewBag.Categorias = db.Categorias.ToList();
             return View();
         }
-    }
-    public class Alternativa
-    {
-        public int id { get; set; }
-        public string Valor { get; set; }
-        public bool Success { get; set; }
     }
 }

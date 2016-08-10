@@ -109,6 +109,14 @@
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -182,22 +190,18 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201607151607093_Name.resx">
-      <DependentUpon>201607151607093_Name.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201607151612152_Picture.resx">
-      <DependentUpon>201607151612152_Picture.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201607151612505_Locale.resx">
-      <DependentUpon>201607151612505_Locale.cs</DependentUpon>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\AlternativasController.cs" />
+    <Compile Include="Areas\Admin\Controllers\CategoriasController.cs" />
+    <Compile Include="Areas\Admin\Controllers\PanelController.cs" />
+    <Compile Include="Areas\Admin\Controllers\QuestoesController.cs" />
+    <Compile Include="Areas\Admin\Controllers\SubcategoriasController.cs" />
+    <Compile Include="Areas\Admin\Models\SubCategoria.cs" />
     <Compile Include="Areas\HelpPage\ApiDescriptionExtensions.cs" />
     <Compile Include="Areas\HelpPage\App_Start\HelpPageConfig.cs" />
     <Compile Include="Areas\HelpPage\Controllers\HelpController.cs" />
@@ -271,17 +275,22 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201607151607093_Name.cs" />
-    <Compile Include="Migrations\201607151607093_Name.Designer.cs">
-      <DependentUpon>201607151607093_Name.cs</DependentUpon>
+    <Compile Include="Helpers.cs" />
+    <Compile Include="Migrations\201608071939069_Name.cs" />
+    <Compile Include="Migrations\201608071939069_Name.Designer.cs">
+      <DependentUpon>201608071939069_Name.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201607151612152_Picture.cs" />
-    <Compile Include="Migrations\201607151612152_Picture.Designer.cs">
-      <DependentUpon>201607151612152_Picture.cs</DependentUpon>
+    <Compile Include="Migrations\201608071940087_Picture.cs" />
+    <Compile Include="Migrations\201608071940087_Picture.Designer.cs">
+      <DependentUpon>201608071940087_Picture.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201607151612505_Locale.cs" />
-    <Compile Include="Migrations\201607151612505_Locale.Designer.cs">
-      <DependentUpon>201607151612505_Locale.cs</DependentUpon>
+    <Compile Include="Migrations\201608071940278_Locale.cs" />
+    <Compile Include="Migrations\201608071940278_Locale.Designer.cs">
+      <DependentUpon>201608071940278_Locale.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201608081703457_IsAdmin.cs" />
+    <Compile Include="Migrations\201608081703457_IsAdmin.Designer.cs">
+      <DependentUpon>201608081703457_IsAdmin.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -293,10 +302,32 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\LocalDB.mdf" />
-    <Content Include="App_Data\LocalDB_log.ldf">
-      <DependentUpon>LocalDB.mdf</DependentUpon>
-    </Content>
+    <Content Include="Areas\Admin\Content\bootstrap.css" />
+    <Content Include="Areas\Admin\Content\bootstrap.min.css" />
+    <Content Include="Areas\Admin\Content\Images\blur.jpg" />
+    <Content Include="Areas\Admin\Content\PagedList.css" />
+    <Content Include="Areas\Admin\Content\Site.css" />
+    <Content Include="Areas\Admin\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Areas\Admin\Scripts\ai.0.22.9-build00167.js" />
+    <Content Include="Areas\Admin\Scripts\ai.0.22.9-build00167.min.js" />
+    <Content Include="Areas\Admin\Scripts\bootstrap.js" />
+    <Content Include="Areas\Admin\Scripts\bootstrap.min.js" />
+    <Content Include="Areas\Admin\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Areas\Admin\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Areas\Admin\fonts\glyphicons-halflings-regular.woff" />
+    <None Include="Areas\Admin\Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Areas\Admin\Scripts\jquery-1.10.2.js" />
+    <Content Include="Areas\Admin\Scripts\jquery-1.10.2.min.js" />
+    <None Include="Areas\Admin\Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Areas\Admin\Scripts\jquery.validate.js" />
+    <Content Include="Areas\Admin\Scripts\jquery.validate.min.js" />
+    <Content Include="Areas\Admin\Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Areas\Admin\Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Areas\Admin\Scripts\modernizr-2.6.2.js" />
+    <Content Include="Areas\Admin\Scripts\Questoes.js" />
+    <Content Include="Areas\Admin\Scripts\respond.js" />
+    <Content Include="Areas\Admin\Scripts\respond.min.js" />
+    <None Include="Areas\Admin\Scripts\_references.js" />
     <Content Include="Areas\email.html" />
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="Content\bootstrap.css" />
@@ -316,6 +347,7 @@
     <Content Include="Content\metro-schemes.min.css" />
     <Content Include="Content\metro.css" />
     <Content Include="Content\metro.min.css" />
+    <Content Include="Content\PagedList.css" />
     <Content Include="EF\Database.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Database.edmx</DependentUpon>
@@ -364,6 +396,25 @@
     <Content Include="fonts\metro.ttf" />
     <Content Include="fonts\metro.woff" />
     <Content Include="fonts\selection.json" />
+    <Content Include="Areas\Admin\Views\web.config" />
+    <Content Include="Areas\Admin\Views\Alternativas\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Alternativas\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Alternativas\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Categorias\Add.cshtml" />
+    <Content Include="Areas\Admin\Views\Categorias\Editar.cshtml" />
+    <Content Include="Areas\Admin\Views\Categorias\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Panel\About.cshtml" />
+    <Content Include="Areas\Admin\Views\Panel\Contact.cshtml" />
+    <Content Include="Areas\Admin\Views\Panel\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Questoes\Editar.cshtml" />
+    <Content Include="Areas\Admin\Views\Questoes\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Questoes\Novo.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\Error.cshtml" />
+    <Content Include="Areas\Admin\Views\Subcategorias\Add.cshtml" />
+    <Content Include="Areas\Admin\Views\Subcategorias\Editar.cshtml" />
+    <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Admin\Scripts\jquery-1.10.2.min.map" />
     <None Include="Properties\PublishProfiles\azure.pubxml" />
     <None Include="Properties\PublishProfiles\simulados.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -425,7 +476,23 @@
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201608071939069_Name.resx">
+      <DependentUpon>201608071939069_Name.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608071940087_Picture.resx">
+      <DependentUpon>201608071940087_Picture.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608071940278_Locale.resx">
+      <DependentUpon>201608071940278_Locale.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608081703457_IsAdmin.resx">
+      <DependentUpon>201608081703457_IsAdmin.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

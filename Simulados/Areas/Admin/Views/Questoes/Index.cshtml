@@ -1,0 +1,53 @@
+﻿@using Simulados;
+@model PagedList.IPagedList<Simulados.EF.Questao>
+@using PagedList.Mvc;
+
+@{
+    ViewBag.Title = "Questões";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@ViewBag.Title</h2>
+<hr/>
+
+<p>
+    @Html.ActionLink("Adicionar uma questão", "Novo")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Enunciado
+        </th>
+        <th>
+            Categoria
+        </th>
+        <th>
+            Subcategoria
+        </th>
+        <th>Opções</th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @item.Enunciado.Reduce(150)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Subcategorias.Categorias.Nome)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Subcategorias.Nome)
+        </td>
+        <td>
+            @Html.ActionLink("Editar", "Edit", new { id=item.Id, Area = "Admin" }) 
+            @if (item.Simulados_Questoes.Count() == 0)
+            {
+                @Html.ActionLink("Excluir", "Delete", new { id = item.Id })
+            }
+        </td>
+    </tr>
+}
+
+</table>
+
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page}))

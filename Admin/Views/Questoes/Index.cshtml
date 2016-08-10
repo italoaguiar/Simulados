@@ -1,5 +1,6 @@
 ﻿@using Admin;
-@model IEnumerable<Admin.EF.Questoes>
+@model PagedList.IPagedList<Admin.EF.Questoes>
+@using PagedList.Mvc;
 
 @{
     ViewBag.Title = "Questões";
@@ -13,6 +14,7 @@
 }
 
 <h2>@ViewBag.Title</h2>
+<hr/>
 
 <p>
     @Html.ActionLink("Adicionar uma questão", "Novo")
@@ -20,13 +22,13 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Enunciado)
+            Enunciado
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Subcategorias.Categorias.Nome)
+            Categoria
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Subcategorias.Nome)
+            Subcategoria
         </th>
         <th>Opções</th>
     </tr>
@@ -34,7 +36,7 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @item.Enunciado.Reduce(170)
+            @item.Enunciado.Reduce(150)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Subcategorias.Categorias.Nome)
@@ -43,10 +45,15 @@
             @Html.DisplayFor(modelItem => item.Subcategorias.Nome)
         </td>
         <td>
-            @Html.ActionLink("Editar", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Excluir", "Delete", new { id=item.Id })
+            @Html.ActionLink("Editar", "Edit", new { id=item.Id }) 
+            @if (item.Simulados_Questoes1.Count() == 0)
+            {
+                @Html.ActionLink("Excluir", "Delete", new { id = item.Id })
+            }
         </td>
     </tr>
 }
 
 </table>
+
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page}))

@@ -1,0 +1,109 @@
+﻿@model Simulados.EF.Questao
+
+@{
+    ViewBag.Title = "Editar questão";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>@ViewBag.Title</h2>
+
+
+@using (Html.BeginForm("Editar", "Questoes", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Enunciado, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.Enunciado, new { @class = "form-control", rows = 3, style = "width: 100%;box-sizing: border-box;" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="categoria" class="control-label col-md-2">Categoria</label>
+            <div class="col-md-10">
+                <select id="cat" name="categoria" class="form-control">
+                    <option value="@Model.Subcategorias.Categorias.Id">@Model.Subcategorias.Categorias.Nome</option>
+                    @foreach (var item in ViewBag.Categorias)
+                    {
+                        <option value="@item.Id">@item.Nome</option>
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="subcategoria" class="control-label col-md-2">Subcategoria</label>
+            <div class="col-md-10">
+                <select id="subcategoria" name="subcategoria" class="form-control">
+                    <option value="@Model.Subcategorias.Id">@Model.Subcategorias.Nome</option>
+                    @foreach (var item in ViewBag.SubCategorias)
+                    {
+                        <option value="@item.Id">@item.Nome</option>
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="alt" class="control-label col-md-2">Alternativas</label>
+            <div class="col-md-10">
+                <div id="alt-group">
+                    @foreach (var item in Model.Alternativas1)
+                    {
+                        <div class="row">
+                            <div class="col-md-1">
+                                <input type="radio" class="form-control" />
+                            </div>                            
+                            <div class="input-group col-md-11">
+                                <input type="text" class="form-control" value="@item.Valor.Trim()" aria-describedby="basic-addon2">
+                                <span class="input-group-btn" id="basic-addon2">
+                                    <button class="btn btn-default" type="button">
+                                        <span class="glyphicon glyphicon-refresh gly-spin"></span>
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="correta" class="control-label col-md-2">Correta</label>            
+            <div class="col-md-10">
+                <select id="correta" name="correta" class="form-control">
+                    <option value="@Model.Alternativas.Id">@Model.Alternativas.Valor</option>
+                    @foreach (var item in Model.Alternativas1.Where(p=> p.Id != Model.Correta))
+                    {
+                        <option value="@item.Id">@item.Valor</option>
+                    }
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="correta" class="control-label col-md-2">Imagem</label>
+            <div class="col-md-10">
+                <input type="hidden" id="imagem" name="imagem" value="@Model.Imagem" />
+                <input type="file" id="uploadImage" />
+                <p>*A imagem só será alterada se você carregar uma nova.</p>
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Cadastrar" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+
+<div>
+    @Html.ActionLink("Voltar", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript" src="~/Scripts/Questoes.js"></script>
+}

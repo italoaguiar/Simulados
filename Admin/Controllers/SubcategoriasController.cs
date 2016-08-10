@@ -17,38 +17,20 @@ namespace Admin.Controllers
         // GET: Subcategorias
         public ActionResult Index()
         {
-            var subcategorias = db.Subcategorias.Include(s => s.Categorias);
-            return View(subcategorias.ToList());
-        }
-
-        // GET: Subcategorias/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Subcategorias subcategorias = db.Subcategorias.Find(id);
-            if (subcategorias == null)
-            {
-                return HttpNotFound();
-            }
-            return View(subcategorias);
+            return RedirectToAction("Index", "Categorias", null);
         }
 
         // GET: Subcategorias/Create
-        public ActionResult Create()
+        public ActionResult Add()
         {
             ViewBag.Pai = new SelectList(db.Categorias, "Id", "Nome");
             return View();
         }
 
         // POST: Subcategorias/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Nome,Pai,Qtd")] Subcategorias subcategorias)
+        public ActionResult Add([Bind(Include = "Id,Nome,Pai,Qtd")] Subcategorias subcategorias)
         {
             if (ModelState.IsValid)
             {
@@ -62,7 +44,7 @@ namespace Admin.Controllers
         }
 
         // GET: Subcategorias/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult Editar(int? id)
         {
             if (id == null)
             {
@@ -78,11 +60,9 @@ namespace Admin.Controllers
         }
 
         // POST: Subcategorias/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Nome,Pai,Qtd")] Subcategorias subcategorias)
+        public ActionResult Editar([Bind(Include = "Id,Nome,Pai,Qtd")] Subcategorias subcategorias)
         {
             if (ModelState.IsValid)
             {
@@ -92,32 +72,6 @@ namespace Admin.Controllers
             }
             ViewBag.Pai = new SelectList(db.Categorias, "Id", "Nome", subcategorias.Pai);
             return View(subcategorias);
-        }
-
-        // GET: Subcategorias/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Subcategorias subcategorias = db.Subcategorias.Find(id);
-            if (subcategorias == null)
-            {
-                return HttpNotFound();
-            }
-            return View(subcategorias);
-        }
-
-        // POST: Subcategorias/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            Subcategorias subcategorias = db.Subcategorias.Find(id);
-            db.Subcategorias.Remove(subcategorias);
-            db.SaveChanges();
-            return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)

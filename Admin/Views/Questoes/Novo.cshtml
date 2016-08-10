@@ -116,4 +116,9 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
     <script type="text/javascript" src="~/Scripts/Questoes.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            loadsubcat($("#categoria").val());
+        });
+    </script>
 }
