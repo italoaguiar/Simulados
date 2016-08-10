@@ -76,7 +76,7 @@ namespace Simulados.Controllers
                                               select new Models.Alternativa()
                                               {
                                                   Id = a.Id,
-                                                  Enunciado = a.Valor.Trim(),
+                                                  Enunciado = a.Valor,
                                                   Imagem = a.Imagem
                                               }).ToList()
                           };
@@ -99,7 +99,7 @@ namespace Simulados.Controllers
                                               select new Models.Alternativa()
                                               {
                                                   Id = a.Id,
-                                                  Enunciado = a.Valor.Trim(),
+                                                  Enunciado = a.Valor,
                                                   Imagem = a.Imagem
                                               }).ToList()
                           };

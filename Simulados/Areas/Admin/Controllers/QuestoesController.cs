@@ -44,6 +44,23 @@ namespace Simulados.Areas.Admin.Controllers
             }
         }
 
+        public ContentResult EditAlternativa(int id, string alternativa, string imagem)
+        {
+            try
+            {
+                Alternativa a = db.Alternativas.Find(id);
+                a.Valor = alternativa;
+                a.Imagem = string.IsNullOrEmpty(imagem) ? null : imagem;
+
+                db.SaveChanges();
+                return Content(a.Id.ToString());
+            }
+            catch
+            {
+                return Content("Error");
+            }
+        }
+
         public JsonResult Subcategorias(int categoria)
         {
             var r = from k in db.Subcategorias
@@ -113,7 +130,38 @@ namespace Simulados.Areas.Admin.Controllers
             ViewBag.Categorias = db.Categorias.Where(p=> p.Id != item.Subcategorias.Categorias.Id).ToList();
             ViewBag.SubCategorias = db.Subcategorias.Where(p => p.Id != item.Cat && p.Pai == item.Subcategorias.Categorias.Id).ToList();
 
+            foreach(var i in item.Alternativas)
+            {
+                System.Diagnostics.Debug.WriteLine(i.Valor);
+            }
+
             return View(item);
+        }
+
+        [HttpPost]
+        public ActionResult Editar(int id, string enunciado, int correta, int subcategoria, string imagem)
+        {
+            var item = db.Questoes.Find(id);
+            item.Enunciado = enunciado;
+            item.Correta = correta;
+            item.Cat = subcategoria;
+            item.Imagem = imagem;
+
+            db.SaveChanges();
+
+            return RedirectToAction("Index");
+        }
+
+
+        public ActionResult Delete(int id)
+        {
+            var item = db.Questoes.Find(id);
+            if (item == null) return new HttpStatusCodeResult(System.Net.HttpStatusCode.NotFound);
+
+            db.Questoes.Remove(item);
+            db.SaveChanges();
+
+            return RedirectToAction("Index");
         }
 
         public ActionResult Novo()

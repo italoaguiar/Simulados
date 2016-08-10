@@ -334,10 +334,12 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Images\chart.png" />
     <Content Include="Content\Images\detran.png" />
+    <Content Include="Content\Images\kam.jpg" />
     <Content Include="Content\Images\mobile.png" />
     <Content Include="Content\Images\nhome1.jpg" />
     <Content Include="Content\Images\enem.png" />
     <Content Include="Content\Images\nhome.jpg" />
+    <Content Include="Content\Images\other.png" />
     <Content Include="Content\Images\pdf.png" />
     <Content Include="Content\Images\st1.jpg" />
     <Content Include="Content\metro-colors.min.css" />

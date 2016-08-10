@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="DBContext-Web.config Connection String" description="DBContext Connection String used in web.config by the application to access the database." defaultValue="Server=tcp:simulados.database.windows.net,1433;Initial Catalog=SimuladosDB;Persist Security Info=False;User ID=websimulados;Password=Mudar123!@#;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\italo\\Source\\Repos\\Simulados\\Simulados\\obj\\Debug\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='DBContext']/@connectionString" />
+  </parameter>
+  <parameter name="LocalDBEntities-Web.config Connection String" description="LocalDBEntities Connection String used in web.config by the application to access the database." defaultValue="metadata=res://*/EF.Database.csdl|res://*/EF.Database.ssdl|res://*/EF.Database.msl;provider=System.Data.SqlClient;provider connection string=&quot;Server=tcp:simulados.database.windows.net,1433;Initial Catalog=SimuladosDB;Persist Security Info=False;User ID=websimulados;Password=Mudar123!@#;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;&quot;" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\italo\\Source\\Repos\\Simulados\\Simulados\\obj\\Debug\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='LocalDBEntities']/@connectionString" />
+  </parameter>
+</parameters>

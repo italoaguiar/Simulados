@@ -1,0 +1,72 @@
+﻿@using Simulados.Models
+@model LoginViewModel
+@{
+    ViewBag.Title = "Log in";
+    
+}
+
+<div class="bg-darkTeal">
+    <div class="login-form padding20 block-shadow">
+        @using (Html.BeginForm("Login", "Conta", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new {data_role = "validator", data_hint_mode = "hint", role = "form" }))
+        {
+            @Html.AntiForgeryToken()
+            <h1 class="text-light">@ViewBag.Title</h1>
+            <hr class="thin" />
+            <br />
+            @Html.ValidationSummary(true, "", new {@class = "text-danger"})
+            <div class="input-control text full-size" data-role="input">
+                @Html.LabelFor(m => m.Email)
+                @Html.TextBoxFor(m => m.Email, new {
+                   data_validate_func = "required",
+                   data_validate_hint= "O email é obrigatório",
+                   data_validate_hint_position = "right"
+               })
+                <button class="button helper-button clear"><span class="mif-cross"></span></button>
+                <span class="input-state-error mif-warning"></span>
+                <span class="input-state-success mif-checkmark"></span>
+
+            </div>
+            <br />
+            <br />
+            <div class="input-control password full-size" data-role="input">
+                @Html.LabelFor(m => m.Password)
+                @Html.PasswordFor(m => m.Password, new {
+                   data_validate_func = "required",
+                   data_validate_hint = "A senha é obrigatória",
+                   data_validate_hint_position = "right"
+               })
+                <button class="button helper-button reveal"><span class="mif-looks"></span></button>
+                <span class="input-state-error mif-warning"></span>
+                <span class="input-state-success mif-checkmark"></span>
+
+            </div>
+            <br />
+            <br />
+            <div class="form-actions">
+                <button type="submit" class="button primary">Entrar</button>
+                @Html.ActionLink("Cancelar","Index","Home",null,new { @class = "button link"})
+            </div>
+            <hr/>
+            @Html.ActionLink("Não é cadastrado? Registre-se!", "Register");
+            @*@Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })*@
+        }
+    </div>
+</div>
+
+
+
+@section scripts{
+    <script>
+        $(function () {
+            var form = $(".login-form");
+
+            form.css({
+                opacity: 1,
+                "-webkit-transform": "scale(1)",
+                "transform": "scale(1)",
+                "-webkit-transition": ".5s",
+                "transition": ".5s"
+            });
+        });
+    </script>
+}

@@ -1,0 +1,24 @@
+﻿@if (Request.IsAuthenticated)
+{
+    using (Html.BeginForm("LogOff", "Conta", FormMethod.Post, new { id = "logoutForm" }))
+    {
+        @Html.AntiForgeryToken()
+    }
+    <ul class="app-bar-menu">
+        <li>
+            <span class="dropdown-toggle"> Olá @ViewBag.UserName</span>
+            <ul class="d-menu" data-role="dropdown">
+                <li><a href="@Url.Action("Index","Simulados")">Meus Simulados</a></li>
+                <li class="divider"></li>
+                <li><a href="#" onclick="document.getElementById('logoutForm').submit()">Sair</a></li>
+            </ul>
+        </li>
+    </ul>
+}
+else
+{
+    <ul class="app-bar-menu">        
+        <li><a class="btn btn-link" href="@Url.Action("Login","Conta")">Entrar</a></li>
+    </ul>
+
+}
